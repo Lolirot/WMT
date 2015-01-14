@@ -1,0 +1,53 @@
+CREATE TABLE FinancialAdvisor (
+faID INT PRIMARY KEY AUTO_INCREMENT,
+faFirstName VARCHAR(25) NOT NULL,
+faLast VARCHAR(25) NOT NULL,
+faPhoneNo VARCHAR(25) NOT NULL,
+faAddress VARCHAR(225) NOT NULL
+)ENGINE=INNODB;
+
+CREATE TABLE Customer (
+customerID INT PRIMARY KEY AUTO_INCREMENT,
+firstName VARCHAR(25) NOT NULL,
+lastName VARCHAR(25) NOT NULL,
+phoneNumber VARCHAR(25) NOT NULL,
+address VARCHAR(225) NOT NULL,
+faID INT,
+FOREIGN KEY (faID) REFERENCES FinancialAdvisor(faID) 
+)ENGINE=INNODB;
+
+
+CREATE TABLE BankAccount (
+accountID INT NOT NULL,
+customerID INT NOT NULL,
+iban BIGINT NOT NULL,
+bankName VARCHAR(25) NOT NULL,
+bankAddress VARCHAR(225) NOT NULL,
+accountNumber BIGINT NOT NULL,
+balance INT NOT NULL,
+PRIMARY KEY (accountID),
+FOREIGN KEY (customerID) REFERENCES Customer(customerID) 
+)ENGINE=INNODB;
+
+
+
+CREATE TABLE TransactionHistory (
+historyRef INT NOT NULL,
+customerID INT NOT NULL,
+dateOfTrans DATE NOT NULL,
+accountID INT NOT NULL,
+faID INT NOT NULL,
+PRIMARY KEY (historyRef, customerID),
+FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+FOREIGN KEY (faID) REFERENCES FinancialAdvisor(faID),
+FOREIGN KEY (accountID) REFERENCES BankAccount(accountID)  
+)ENGINE=INNODB;
+
+CREATE TABLE CustomerStock (
+customerID INT PRIMARY KEY,
+company VARCHAR(25) NOT NULL,
+sharesNo INT NOT NULL,
+historyRef INT NOT NULL,
+FOREIGN KEY (customerID) REFERENCES Customer(customerID),
+FOREIGN KEY (historyRef) REFERENCES TransactionHistory(historyRef)
+)ENGINE=INNODB;
