@@ -101,38 +101,13 @@ img {
 	padding-top:-50px;
 }
 
-#menu ul {
-	min-width: 696px;
-	list-style: none;
-	padding-top: 20px;
-	padding-left:25%;
-}
 
-#menu li {
-	margin-left:7%;
-	display: inline
-	
-}
-
-#menu a {
-		
-	text-decoration: none;
-	letter-spacing: -1px;
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #333333;
-}
-
-#menu a:hover {
-	text-decoration: underline;
-}
 
 /* Page */
 
 #page {
 	width: 80%;
 	margin: 0 auto;
-	background: url(images/img05.gif);
 }
 
 #midpage{
@@ -142,26 +117,30 @@ img {
 
 /* LeftBar */
 
-#leftclients{
-	float:left;
-	width:20%;
-	margin-top:-380px;
-	
-	
-}
-
 
 /* Sidebar */
 
 #sidebar {
 	float: right;
+	width:20%;
 }
+
+
 
 /*Calendar*/
 #calendar{
 	margin-left: 80%;
 }
 
+#left{
+	position:absolute;
+    left:10%; top:18%; bottom: 0;
+    width: 178px;
+}
+
+position:absolute;
+    left:0; top:92px; bottom: 0;
+    width: 178px;
 /* Footer */
 
 #footer {
