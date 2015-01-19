@@ -46,62 +46,46 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="clients.html">Clients</a></li>
-      <li><a href="StockMarket.html">Stock Market</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Clients.html">Clients</a></li>
+      <li  class="active"><a href="#contact">Stock Market</a></li>
       
     </ul>
   </div>
 </nav>
 
-<!-- -----------------------------------------------------NAV END--------------------------------------------------- -->
 <div class="row">
-
-<div class="col-md-3">
-<div class="panel panel-default">
+	<div class="col-md-4">
+	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Upcoming Events</h3>
+    <h3 class="panel-title">Information Panel</h3>
   </div>
   <div class="panel-body">
-    Display here events that are picked from the database, but selected for a specific date or range of dates or something.
+  <p>display info on the ups and downs of selected stocks.</p>
   </div>
 </div>
 </div>
 
-<div class="col-md-6">
-<div class="panel panel-default">
+<div class="col-md-6"
+<div class="col-md-4">
+	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Newsupdate</h3>
+    <h3 class="panel-title">Stockmarket Graph</h3>
   </div>
   <div class="panel-body">
-    news news news news news news news news news news news news news news news news news news news news news news news news news news news news news news 
-
-news news news news news news 
+  
+  <?php
+    $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
+    $yql_query = 'INSERT QUERY';
+    $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
+    $session = curl_init($yql_query_url);
+    curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
+    $json = curl_exec($session);
+    $phpObj =  json_decode($json);
+    $symbols = $phpObj->query->results->quote[0]->symbol;
+    echo $symbols;
+?>
   </div>
 </div>
 </div>
-
-
-
-<div class="col-md-3">
-	<div class="jquery-calendar"></div> 
-	<div class="panel panel-default events">
-  <div class="panel-heading">
-    <h3 class="panel-title">Meetings for this day</h3>
-  </div>
-  <div class="panel-body">
-    Time: </br>
-    Day: </br>
-    Note:
-  </div>
-</div>
-</div>
-</div>
-
-
-<div id="footer">
-	<p class="links"> <a href="http://validator.w3.org/check/referer" class="xhtml" title="This page validates as XHTML">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a> &nbsp;&bull;&nbsp; <a href="http://jigsaw.w3.org/css-validator/check/referer" class="css" title="This page validates as CSS">Valid <abbr title="Cascading Style Sheets">CSS</abbr></a> </p>
-</div>
-<!-- end footer -->
 </body>
-</html>

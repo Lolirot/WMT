@@ -7,12 +7,21 @@
 <meta name="description" content="" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <link href="default.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="bootstrap-3.3.1/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="bootstrap-3.3.1/dist/css/bootstrap.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="calendar.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="bootstrap-3.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
+<link rel="stylesheet" href="bootstrap-3.3.1/dist/css/bootstrap-theme.min.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="bootstrap-3.3.1/js/dropdown.js"></script>
-</head>
+<script src="bootstrap-3.3.1/js/button.js"></script>
+<script src="bootstrap-3.3.1/js/collapse.js"></script>
 
+<script src="bootstrap-3.3.1/calendar.js"></script>
+
+
+
+
+
+</head>
 <body>
 <!-- start header -->
 <div id="header">
@@ -22,64 +31,93 @@
 </div>
 
 
+
 <!-- start page -->
+
 <!-- -----------------------------------------------------NAV START--------------------------------------------------- -->
-<nav role="presentation" class="navbar navbar-inverse">
-<div class="container">
-   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Clients List</a></li>
-        <li><a href="#">Stock Market</a></li>
-      </ul>
+<nav class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">Wealth Management Tool</a>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li class="active"><a href="#about">Clients</a></li>
+      <li ><a href="StockMarket.html">Stock Market</a></li>
       
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">More Actions <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Contact Admin</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Log out</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </ul>
   </div>
 </nav>
+
 <!-- -----------------------------------------------------NAV END--------------------------------------------------- -->
-<div id="page">
-<div id="search">
-<div class="col-sm-3 col-md-3 pull-right">
-            <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="q">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>        
-        </div>
-        
-        <div id="midpage">
-        <div class="panel panel-default">
+<div class="row">
+
+<div class="col-xs-12 col-md-8  ">
+<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Clients List</h3>
   </div>
   <div class="panel-body">
-    All clients listed here
+    <table class="table table-condensed">
+    <thead>
+<tr>
+<th>Name</th>
+<th>Surname</th>
+<th>Telephone</th>
+</tr>
+</thead>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+    <td><button type="button" class="btn btn-default" aria-label="Left Align" action="SingleClient.html">
+  <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+</button><a href="SingleClient.html"><button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+</button></a>
+	</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+    <td><button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+</button><button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+</button></td>
+  </tr>
+</table>
   </div>
 </div>
-        </div>
-        
-       <div id="left">
-       
-       </div>
-	<div id="sidebar">			
-	<button class="btn btn-success" type="button">Add New Client</button>
+</div>
+
+<div class="col-xs-6 col-md-4">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Latest Tweets</h3>
+  </div>
+  <div class="panel-body">
+                           <a class="twitter-timeline"  href="https://twitter.com/Lolirotten_" data-widget-id="556888036668358656">Tweets by @Lolirotten_</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
+          
+  </div>
 </div>
 </div>
+
+
+
+</div>
+
+
+
+
 <div id="footer">
 	<p class="links"> <a href="http://validator.w3.org/check/referer" class="xhtml" title="This page validates as XHTML">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a> &nbsp;&bull;&nbsp; <a href="http://jigsaw.w3.org/css-validator/check/referer" class="css" title="This page validates as CSS">Valid <abbr title="Cascading Style Sheets">CSS</abbr></a> </p>
 </div>
