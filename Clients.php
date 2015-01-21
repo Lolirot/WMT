@@ -180,7 +180,7 @@ while($row = mysql_fetch_array($result)){
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <div class="input-group-addon">£</div>
+      <div class="input-group-addon">Â£</div>
       <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
     </div>
   </div>
