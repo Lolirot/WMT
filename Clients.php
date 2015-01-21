@@ -125,13 +125,18 @@ while($row = mysql_fetch_array($result)){
     echo $row['phone_number'];
      echo "</td>";
     
+    $id = $row['id'];
+    
+    
     echo  '<td>
     
-	<button type="button" class="btn btn-default" aria-label="Left Align" action="SingleClient.html">
+	<button type="submit"   "class="btn btn-default" aria-label="Left Align" action="SingleClient.php">
   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-</button><a href="SingleClient.html"><button type="button" class="btn btn-default" aria-label="Left Align">
+</button><form action="SingleClient.php" method="post">
+<button type="submit" value="'.$id.'" name="id" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-</button></a>
+</button>
+</form>
 	</td>';
   echo "</tr>";
    

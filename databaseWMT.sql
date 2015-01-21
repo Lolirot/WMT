@@ -18,6 +18,7 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 first_name VARCHAR(25) NOT NULL,
 last_name VARCHAR(25) NOT NULL,
 phone_number VARCHAR(25) NOT NULL,
+email_address VARCHAR(30) NOT NULL,
 address VARCHAR(225) NOT NULL,
 fa_id INT,
 FOREIGN KEY (fa_id) REFERENCES financial_advisors(id) 
@@ -66,9 +67,9 @@ meeting_customer INT NOT NULL,
 FOREIGN KEY (meeting_customer) REFERENCES customers(id)
 )ENGINE=INNODB;
 
-INSERT INTO financial_advisors (fa_first_name,fa_last_name,fa_phone_no,fa_address) VALUES ('Rob','Pooley',07898334332,'11 Grove Street, Compton, USA');
+INSERT INTO financial_advisors (fa_first_name,fa_last_name,fa_phone_no,fa_address) VALUES ('John','Smith',07898334332,'11 Grove Street, Compton, USA');
 
-INSERT INTO customers (first_name,last_name,phone_number,address,fa_id) VALUES ('Walter','White',07838374733,'2 Mulholland Drive, London, UK',1);
+INSERT INTO customers (first_name,last_name,phone_number,email_address,address,fa_id) VALUES ('Walter','White',07838374733,'walterwhite@gmail.com','2 Mulholland Drive, London, UK',1);
 
 INSERT INTO bank_accounts (account_number,customer_id,iban,bank_name,bank_address,balance) VALUES (1432123,1,12342345,'Large Bank lol','141 Waterloo Street, Glasgow, UK',5000);
 

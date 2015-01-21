@@ -45,10 +45,11 @@ dbSelect("$username");
 $firstName = $_POST["firstname"];
 $lastName = $_POST["lastname"];
 $address = $_POST["address"];
+$emailaddress = $_POST["email"];
 $phone = $_POST["phone"];
 
 
-$query = "INSERT INTO customers (first_name,last_name,phone_number,address,fa_id) VALUES ('$firstName', '$lastName', '$phone', 
+$query = "INSERT INTO customers (first_name,last_name,phone_number,email_address,address,fa_id) VALUES ('$firstName', '$lastName', '$phone', '$emailaddress',
                               '$address', 1)";
 
 //remove this line when query comes out looking ok
