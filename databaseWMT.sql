@@ -20,8 +20,8 @@ last_name VARCHAR(25) NOT NULL,
 phone_number VARCHAR(25) NOT NULL,
 email_address VARCHAR(30) NOT NULL,
 address VARCHAR(225) NOT NULL,
-fa_id INT,
-FOREIGN KEY (fa_id) REFERENCES financial_advisors(id) 
+faid INT,
+FOREIGN KEY (faid) REFERENCES financial_advisors(id) 
 )ENGINE=INNODB;
 
 
@@ -41,6 +41,7 @@ CREATE TABLE transaction_histories (
 id INT AUTO_INCREMENT,
 customer_id INT NOT NULL,
 date_of_trans DATE NOT NULL,
+amount INT NOT NULL,
 account_num INT NOT NULL,
 fa_id INT NOT NULL,
 PRIMARY KEY (id),
@@ -52,7 +53,7 @@ FOREIGN KEY (account_num) REFERENCES bank_accounts(account_number)
 CREATE TABLE customer_stocks (
 id INT PRIMARY KEY AUTO_INCREMENT,
 customer_id INT,
-company VARCHAR(4) NOT NULL,
+company VARCHAR(15) NOT NULL,
 shares_no INT NOT NULL,
 history_ref INT NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES customers(id),
@@ -69,12 +70,14 @@ FOREIGN KEY (meeting_customer) REFERENCES customers(id)
 
 INSERT INTO financial_advisors (fa_first_name,fa_last_name,fa_phone_no,fa_address) VALUES ('John','Smith',07898334332,'11 Grove Street, Compton, USA');
 
-INSERT INTO customers (first_name,last_name,phone_number,email_address,address,fa_id) VALUES ('Walter','White',07838374733,'walterwhite@gmail.com','2 Mulholland Drive, London, UK',1);
+INSERT INTO customers (first_name,last_name,phone_number,email_address,address,faid) VALUES ('Walter','White',07838374733,'walterwhite@gmail.com','2 Mulholland Drive, London, UK',1);
 
 INSERT INTO bank_accounts (account_number,customer_id,iban,bank_name,bank_address,balance) VALUES (1432123,1,12342345,'Large Bank lol','141 Waterloo Street, Glasgow, UK',5000);
 
-INSERT INTO transaction_histories (customer_id,date_of_trans,account_num,fa_ID) VALUES (1,'2014-11-24',1432123,1);
+INSERT INTO transaction_histories (customer_id,date_of_trans,amount,account_num,fa_ID) VALUES (1,'2014-11-24',30000000,1432123,1);
+INSERT INTO transaction_histories (customer_id,date_of_trans,amount,account_num,fa_ID) VALUES (1,'2015-01-01',100000,1432123,1);
 
 INSERT INTO customer_stocks (customer_id,company,shares_no,history_ref) VALUES (1,'GOOG',3000,1);
+INSERT INTO customer_stocks (customer_id,company,shares_no,history_ref) VALUES (1,'GLENCORE',10000,2);
 
 INSERT INTO meetings (meeting_date_time,meeting_description,meeting_customer) VALUES ('2015-02-11 13:30:00','Meeting to discuss progress of investments',1);  

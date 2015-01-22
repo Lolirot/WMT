@@ -149,7 +149,51 @@ while($row2 = mysql_fetch_array($result2)){
     <h3 class="panel-title">Client Stocks</h3>
   </div>
   <div class="panel-body">
-  <p>Fetch from database the stocks owned by this client, then put them in a query to retrieve the graph from the yahoo API</p>
+	  
+	  <table class="table table-condensed">
+    <thead>
+<tr>
+<th>Company</th>
+<th>Number of Shares</th>
+<th>History Ref</th>
+</tr>
+</thead>
+  
+  <?php
+    
+    
+
+$id = $_POST["id"];
+
+$query = "SELECT * FROM customer_stocks WHERE customer_id=$id"; 
+
+$result = mysql_query($query) or die(mysql_error());
+
+while($row = mysql_fetch_array($result)){
+    
+
+ echo "<tr>";
+   echo "<td>";
+    echo $row['company'];
+	echo "</td>";
+    
+    echo "<td>";
+    echo $row['shares_no'];
+     echo "</td>";
+     
+   echo "<td>";
+    echo $row['history_ref'];
+   echo "</td>";
+ 
+ 
+   
+  echo "</tr>";
+  
+}
+  
+  
+  ?>
+   </table>
   </div>
 </div>
 </div>

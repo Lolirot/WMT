@@ -49,7 +49,7 @@ $emailaddress = $_POST["email"];
 $phone = $_POST["phone"];
 
 
-$query = "INSERT INTO customers (first_name,last_name,phone_number,email_address,address,fa_id) VALUES ('$firstName', '$lastName', '$phone', '$emailaddress',
+$query = "INSERT INTO customers (first_name,last_name,phone_number,email_address,address,faid) VALUES ('$firstName', '$lastName', '$phone', '$emailaddress',
                               '$address', 1)";
 
 //remove this line when query comes out looking ok
