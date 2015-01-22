@@ -8,5 +8,6 @@ function yqlQuery($query)
     curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
     $json = curl_exec($session);
     $phpObj =  json_decode($json);
+    return $phpObj;
 }
 ?>
