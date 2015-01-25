@@ -3,19 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="calendar.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="bootstrap-3.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
-<link rel="stylesheet" href="bootstrap-3.3.1/dist/css/bootstrap-theme.min.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="bootstrap-3.3.1/js/dropdown.js"></script>
-<script src="bootstrap-3.3.1/js/button.js"></script>
-<script src="bootstrap-3.3.1/js/collapse.js"></script>
-
-<script src="bootstrap-3.3.1/calendar.js"></script>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 
 
@@ -25,8 +21,7 @@
 <body>
 <!-- start header -->
 <div id="header">
-<img src="images/logo.png" alt="Smiley face"></img>
-<p>Wealth Management Tool</p>
+<img src="images/WMT.png" alt="Wealth Management Tool"></img>
 <!-- end header -->
 </div>
 
@@ -51,6 +46,9 @@
       <li><a href="StockMarket.html">Stock Market</a></li>
       
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="Login.html">Log out</a></li>
+   </ul>
   </div>
 </nav>
 
@@ -58,11 +56,17 @@
 	<div class="col-md-4">
 	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Client Details</h3>
+    <h3 class="panel-title">&nbsp;&nbsp;&nbsp;&nbsp;Client Details &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <button type="button" id="updatebutton" class="btn btn-default btn-md">
+  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 
+</button></h3>
+   
   </div>
   <div class="panel-body">
-  
-   <table class="table table-condensed">
+  <table class="table table-condensed">
     <thead>
 <tr>
 <th>Name</th>
@@ -139,8 +143,47 @@ while($row2 = mysql_fetch_array($result2)){
   
    </table>
   </div>
+  
+  <form class="form-horizontal" id="update" action="updateCustomer.php" method="post">
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="firstname" placeholder="First Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="email" placeholder="Email Address">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="address" placeholder="Home Address ">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name="phone" placeholder="Telephone/Mobile">
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" name="id" value="<?php echo $_POST["id"]; ?>" class="btn btn-default">Update Info</button>
+    </div>
+  </div>
+
+</form>
+  
 </div>
 </div>
+
+
 
 <div class="col-md-6"
 <div class="col-md-4">
@@ -149,9 +192,8 @@ while($row2 = mysql_fetch_array($result2)){
     <h3 class="panel-title">Client Stocks</h3>
   </div>
   <div class="panel-body">
-	  
 	  <table class="table table-condensed">
-    <thead>
+  <thead>
 <tr>
 <th>Company</th>
 <th>Number of Shares</th>
@@ -195,6 +237,23 @@ while($row = mysql_fetch_array($result)){
   ?>
    </table>
   </div>
+  
+  
 </div>
 </div>
+<script>
+	
+	$("#update").hide();
+
+$("#updatebutton").click(function(e) {
+    $("#update").show();
+
+    e.preventDefault();
+});
+
+
+
+
+</script>
+
 </body>

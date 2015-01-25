@@ -79,28 +79,61 @@
 <th>Telephone</th>
 </tr>
 </thead>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-    <td><button type="button" class="btn btn-default" aria-label="Left Align" action="SingleClient.html">
+  <?php
+    
+    include ("dbfunctions.php");
+//retrieve username and password
+$username = "ap307";
+$password = "abcap307354";
+
+
+//connect to database
+dbConnect("$username", "$password") ;
+dbSelect("$username");
+
+
+
+$query = "SELECT * FROM customers"; 
+
+$result = mysql_query($query) or die(mysql_error());
+
+
+while($row = mysql_fetch_array($result)){
+    
+
+ echo "<tr>";
+   echo "<td>";
+    echo $row['first_name'];
+   echo "</td>";
+ 
+ 
+ echo "<td>";
+  echo $row['last_name']; 
+  echo "</td>";
+    
+    echo "<td>";
+    echo $row['phone_number'];
+     echo "</td>";
+    
+    $id = $row['id'];
+    
+    
+    echo  '<td>
+    
+	<button type="submit"   "class="btn btn-default" aria-label="Left Align" action="SingleClient.php">
   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-</button><a href="SingleClient.html"><button type="button" class="btn btn-default" aria-label="Left Align">
+</button><form action="SingleClient.php" method="post">
+<button type="submit" value="'.$id.'" name="id" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-</button></a>
-	</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-    <td><button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-</button><button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-</button></td>
-  </tr>
-</table>
+</button>
+</form>
+	</td>';
+  echo "</tr>";
+   
+}
+
+?>
+ </table>
   </div>
 </div>
 </div>

@@ -2,31 +2,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="calendar.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="bootstrap-3.3.1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen" />
-<link rel="stylesheet" href="bootstrap-3.3.1/dist/css/bootstrap-theme.min.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="bootstrap-3.3.1/js/dropdown.js"></script>
-<script src="bootstrap-3.3.1/js/button.js"></script>
-<script src="bootstrap-3.3.1/js/collapse.js"></script>
-
-<script src="bootstrap-3.3.1/calendar.js"></script>
-
-
-
-
-
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 <!-- start header -->
 <div id="header">
-<img src="images/logo.png" alt="Smiley face"></img>
-<p>Wealth Management Tool</p>
+<img src="images/WMT.png" class="img img-responsive" alt="Wealth Management Tool">
 <!-- end header -->
 </div>
 
@@ -51,6 +39,9 @@
       <li ><a href="StockMarket.html">Stock Market</a></li>
       
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="Login.html">Log out</a></li>
+   </ul>
   </div>
 </nav>
 
@@ -88,8 +79,7 @@
 <th>Telephone</th>
 </tr>
 </thead>
-
- <?php
+  <?php
     
     include ("dbfunctions.php");
 //retrieve username and password
@@ -130,9 +120,12 @@ while($row = mysql_fetch_array($result)){
     
     echo  '<td>
     
-	<button type="submit"   "class="btn btn-default" aria-label="Left Align" action="SingleClient.php">
+    <form action="removeCustomer.php" method="post">
+	<button type="submit" value="'.$id.'" name="id"  "class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-</button><form action="SingleClient.php" method="post">
+</button>
+</form>
+<form action="SingleClient.php" method="post">
 <button type="submit" value="'.$id.'" name="id" class="btn btn-default" aria-label="Left Align">
   <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
 </button>
@@ -144,11 +137,9 @@ while($row = mysql_fetch_array($result)){
 
 ?>
  </table>
-   </div>
- </div>
- </div>
-
-
+  </div>
+</div>
+</div>
 
 
 <div class="col-xs-6 col-md-3">
