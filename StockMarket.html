@@ -47,7 +47,9 @@
     <h3 class="panel-title">Information Panel</h3>
   </div>
   <div class="panel-body">
-  <p>display info on the ups and downs of selected stocks.</p>
+ <h3>Stock Name</h3>
+<h3>Day End Price</h3>
+<h3><font color = "green">Up</font>/<font color = "red">Down</font></h3>
   </div>
 </div>
 </div>
@@ -59,10 +61,7 @@
     <h3 class="panel-title">Stockmarket Graph</h3>
   </div>
   <div class="panel-body">
-<?php
-include(getGraph.php);
-include(yqlquery.php);
-?>
+<img src = "http://chart.finance.yahoo.com/z?s=YHOO&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph">
   </div>
 </div>
 </div>
