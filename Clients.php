@@ -152,38 +152,38 @@ while($row = mysql_fetch_array($result)){
   <form class="form-horizontal" action="addCustomer.php" method="post">
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="firstname" placeholder="First Name">
+      <input type="text" class="form-control" name="firstname" placeholder="First Name" required">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+      <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" placeholder="Email Address">
+      <input type="text" class="form-control" name="email" placeholder="Email Address" required>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="address" placeholder="Home Address ">
+      <input type="text" class="form-control" name="address" placeholder="Home Address " required>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone/Mobile">
+      <input type="number" class="form-control" name="phone" placeholder="Telephone/Mobile" required>
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
       <div class="input-group-addon">£</div>
-      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" required>
     </div>
   </div>
   <div class="form-group">
     <label class="checkbox-horizontal">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> Confirm Amount
+  <input type="checkbox" id="inlineCheckbox1" value="option1" required> Confirm Amount
 </label>
   </div>
   
