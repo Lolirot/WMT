@@ -1,5 +1,5 @@
 <?php
-function yqlQuery($query)
+public function yqlQuery($query)
 {
     $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
     $yql_query = $query;
