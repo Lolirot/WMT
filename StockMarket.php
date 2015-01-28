@@ -60,7 +60,7 @@
     $name = $phpObj->query->results->quote->Name;
     $change = $phpObj->query->results->quote->Change;
     $price = $phpObj->query->results->quote->LastTradePriceOnly;
-    if ($change > 0)
+    if ($change >= 0)
     {
 	echo "<h3>Stock Name: ".$name."</h3>";
 	echo "<h3>Last Trade Price: $".$price."</h3>";
