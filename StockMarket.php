@@ -70,19 +70,20 @@
 	echo "<h3>Last Trade Price: $".$price."</h3>";
 	echo "<h3>Change: <font color = 'red'>".$change."</font></h3>";
     }
-?>
-  </div>
-</div>
-</div>
 
-<div class="col-md-6">
-<div class="col-md-4">
-	<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Stockmarket Graph</h3>
-  </div>
-  <div class="panel-body">
-<img src = "http://chart.finance.yahoo.com/z?s=YHOO&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">
+echo "</div>";
+echo "</div>";
+echo "</div>";
+
+echo '<div class="col-md-6">';
+echo '<div class="col-md-4">';
+echo '<div class="panel panel-default">';
+  echo '<div class="panel-heading">';
+  echo '<h3 class="panel-title">Stockmarket Graph</h3>';
+  echo '</div>';
+  echo '<div class="panel-body">';
+   echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">';
+?>
   </div>
 </div>
 </div>
