@@ -47,29 +47,18 @@
 </div>
 <div class="panel-body">
 <?php
-$BASE_URL = "http://query.yahooapis.com/v1/public/yql";
-$yql_query = "select symbol,Change,LastTradePriceOnly,Name from yahoo.finance.quote where symbol = 'GOOG'";
-$yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
-$session = curl_init($yql_query_url);
-curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
-$json = curl_exec($session);
-$phpObj = json_decode($json);
-$symbol = $phpObj->query->results->quote->symbol;
-$name = $phpObj->query->results->quote->Name;
-$change = $phpObj->query->results->quote->Change;
-$price = $phpObj->query->results->quote->LastTradePriceOnly;
-if ($change >= 0)
-{
+    $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
+    $yql_query = "select symbol,PreviousClose,LastTradePriceOnly,Name from yahoo.finance.quotes where symbol = 'GOOG'";
+    $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
+    $session = curl_init($yql_query_url);
+    curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
+    $json = curl_exec($session);
+    $phpObj =  json_decode($json);
+    $symbol = $phpObj->query->results->quote->symbol;
+    $name = $phpObj->query->results->quote->Name;
+    $price = $phpObj->query->results->quote->PreviousClose;
 echo "<h3>Stock Name: ".$name."</h3>";
-echo "<h3>Last Trade Price: $".$price."</h3>";
-echo "<h3>Change: <font color = 'green'>".$change."</font></h3>";
-}
-else
-{
-echo "<h3>Stock Name: ".$name."</h3>";
-echo "<h3>Last Trade Price: $".$price."</h3>";
-echo "<h3>Change: <font color = 'red'>".$change."</font></h3>";
-}
+echo "<h3>Last Close Price: $".$price."</h3>";
 echo "</div>";
 echo "</div>";
 echo "</div>";
