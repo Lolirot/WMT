@@ -42,15 +42,16 @@
 </nav>
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-xs- col-md-2">
 	<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Information Panel</h3>
   </div>
   <div class="panel-body">
+
 <?php
     $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
-    $yql_query = "select symbol,Change,LastTradePriceOnly,Name from yahoo.finance.quote where symbol = 'YHOO'";
+    $yql_query = "select symbol,Change,LastTradePriceOnly,Name from yahoo.finance.quote where symbol = 'GOOG'";
     $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
     $session = curl_init($yql_query_url);
     curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
@@ -72,21 +73,24 @@
 	echo "<h3>Last Trade Price: $".$price."</h3>";
 	echo "<h3>Change: <font color = 'red'>".$change."</font></h3>";
     }
-
 echo "</div>";
 echo "</div>";
 echo "</div>";
-
-echo '<div class="col-md-6">';
-echo '<div class="col-md-4">';
+//echo '<div class="col-md-6">';
+echo '<div class="col-xs- col-md-8">';
 echo '<div class="panel panel-default">';
-  echo '<div class="panel-heading">';
-  echo '<h3 class="panel-title">Stockmarket Graph</h3>';
-  echo '</div>';
-  echo '<div class="panel-body">';
-   echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">';
+echo '<div class="panel-heading">';
+echo '<h3 class="panel-title">Stockmarket Graph</h3>';
+echo '</div>';
+echo '<div class="panel-body">';
+echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">';
 ?>
-  </div>
+
+</div>
+</div>
+</div>
+<div class="col-xs- col-md-8">'
+</div>
 </div>
 </div>
 </body>
