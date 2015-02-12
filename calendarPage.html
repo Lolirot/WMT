@@ -68,7 +68,30 @@
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
-			defaultDate: '2015-01-27',
+			header: 
+			{
+				left:'prev, next today',
+				center:'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			selectable: true,
+			selectHelper: true,
+			
+			
+			select: function(start, end) {
+			<!-- Prompt that requests a title, possibly change to a bootstrap prompt with start and end fields-->
+				var title = prompt('Please enter the title of your event:');
+				var eventData;
+				if (title) {
+					eventData = {
+						title: title,
+						start: start,
+						end: end
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+				}
+				$('#calendar').fullCalendar('unselect');
+			},
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			events: [
