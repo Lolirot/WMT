@@ -15,7 +15,7 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
 
-
+<link rel="icon" href="images/favicon.ico"/>
 
 
 </head>
