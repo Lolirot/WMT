@@ -4,7 +4,7 @@ DROP TABLE transaction_histories;
 DROP TABLE meetings;
 DROP TABLE customers;
 DROP TABLE financial_advisors;
-
+ 
 CREATE TABLE financial_advisors (
 id INT PRIMARY KEY AUTO_INCREMENT,
 fa_first_name VARCHAR(25) NOT NULL,
