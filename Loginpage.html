@@ -5,14 +5,14 @@ session_start();
 $error_msg="";
 
 
-	if(!isset($_SESSION["fa_email"])){
+	if(!isset($_SESSION["fa_username"])){
 		if(isset($_POST["submit"])){
 			$dbConn = mysql_connect(HOST, USER, PASSWORD, DATABASE);
 			$email = mysql_real_escape_string($dbConn, trim($_POST["email"]));
 			$password = mysql_real_escape_string($dbConn, trim($_POST["password"]));
 			
 				if(!empty($email)&&!empty($password){
-					$query = "SELECT fa_email, fa_password FROM financial_advisors WHERE fa_email = '$email' AND fa_password = (SHA('$password'))";
+					$query = "SELECT fa_username, fa_password FROM financial_advisors WHERE fa_username = '$email' AND fa_password = (SHA('$password'))";
 					$data = mysqli_query($dbConn, $query);
 					
 					if(mysqli_num_rows($data)==1){
