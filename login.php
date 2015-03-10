@@ -1,41 +1,47 @@
 <?php 
 
 require_once("psl-config.php");
+
 session_start();
+
 $error_msg="";
 
 
-	if(!isset($_SESSION["fa_username"])){
-		if(isset($_POST["submit"])){
-			$dbConn = mysql_connect(HOST, USER, PASSWORD, DATABASE);
-			$email = mysql_real_escape_string($dbConn, trim($_POST["email"]));
-			$password = mysql_real_escape_string($dbConn, trim($_POST["password"]));
+	if(!isset($_SESSION['id'])){
+		if(!isset($_POST['submit'])){
+			$dbConn = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+			$user_username = mysqli_real_escape_string($dbConn, trim($_POST['username']));
+			$user_password = mysqli_real_escape_string($dbConn, trim($_POST['password']));
 			
-				if(!empty($email)&&!empty($password){
-					$query = "SELECT fa_username, fa_password FROM financial_advisors WHERE fa_username = '$email' AND fa_password = (SHA('$password'))";
-					$data = mysqli_query($dbConn, $query);
-					
-					if(mysqli_num_rows($data)==1){
-						$row = mysqli_fetch_array($data)
-						$_SESSION["email"]=$row["email"];
-						$_SESSION["password"]=$row["password"];
+			if(!empty($user_username)&&!empty($user_password)){
+				$query = "SELECT id, fa_username FROM financial_advisors WHERE username = '$user_username' AND password = '$user_password'";
+				$data = mysqli_query($dbConn, $query);
 				
-						$home_url = "index.html"
-						header( "location:".$home_url);
-					} else {
-						error_msg = "The email address or password you input was not correct"				
-					}
-				} else {error_msg = "The email address or password you input was not correct"
+				if(mysqli_num_rows($data) == 1){
+					$row = mysql_fetch_array($data);
+					$_SESSION['id'] = $row['id'];
+					$_SESSION['username'] = $row['username'];
+					setcookie('id',$row['id'], time()+(60*60*24*30));
+					setcookie('username',$row['username'], time()+(60*60*24*30));
+					
+					
+					header("Location: ../Login.html");
+				} else{
+					$error_msg = 'Please check your Username or Password';
+				}	
+			} else {
+				$error_msg = 'please check your Username or Password';
 			}
 		}
-	} else {
-		$home_url = "index.html";
-		header("Location:".$home_url);
-	
-	}			
-}
 		
+	} else {
+		
+		header("Location: ../Login.html");
+	}
+	
+
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
@@ -91,16 +97,27 @@ $error_msg="";
 <!-- -----------------------------------------------------NAV END--------------------------------------------------- -->
 
 <div class="container">
-	<form class="form-signin" action="LoginFunction.php">
+
+<?php 
+
+	if(!isset($_SEESION['id'])){
+		echo "<p class = 'error'> </p>"
+	
+
+?>
+
+	<form class="form-signin" action="<?php echo $_SERVER['PHP_SELF'];?>">
 		<h2 class="form-singin-heading">Please Sign In</h2>
-		<label for="inputEmail" class="sr-only">Your Email</label>
-		<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Your Email Address" required autofocus></input>	
+		<label for="inputUsername" class="sr-only">username</label>
+		<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" value="<?php if(!empty($user_username)) echo $user_username;?>" required autofocus ></input>	
 		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required></input>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
 	</form>
 	
-
+<?php 
+	}
+?>
 
 
 </div>
