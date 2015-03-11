@@ -2,7 +2,7 @@
 /*****************************
 *Database connection
 *****************************/
-$conn = @mysql_connect("localhost","user","password");
+$conn = mysql_connect("localhost","user","password");
 if (!$conn){
     die("Fail to connect to database:" . mysql_error());
 }
