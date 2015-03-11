@@ -18,7 +18,7 @@ $password = ($_POST['password']);
 //Include database conncetion file
 include('conn.php');
 //Check if the username and pasasword are correct
-$check_query = mysql_query("select id from financial_advisors where fa_username='$username' and fa_password='$password' 
+$check_query = mysql_query("SELECT id FROM financial_advisors WHERE fa_username='$username' AND fa_password='$password' 
 limit 1");
 if($result = mysql_fetch_array($check_query)){
     //Sign in successfully
