@@ -2,7 +2,7 @@
 session_start();
 //Sign out
 if($_GET['action'] == "logout"){
-    unset($_SESSION['userid']);
+    unset($_SESSION['id']);
     unset($_SESSION['username']);
     echo 'Sign out successfully! Click here <a href="login.html">Sign in</a>';
     exit;
@@ -12,13 +12,13 @@ if($_GET['action'] == "logout"){
 if(!isset($_POST['submit'])){
     exit('Illegal Visit!');
 }
-$username = htmlspecialchars($_POST['username']);
-$password = MD5($_POST['password']);
+$username = ($_POST['username']);
+$password = ($_POST['password']);
 
 //Include database conncetion file
 include('conn.php');
 //Check if the username and pasasword are correct
-$check_query = mysql_query("select id from financial_advisors where fa_username='$username' and password='$password' 
+$check_query = mysql_query("select id from financial_advisors where fa_username='$username' and fa_password='$password' 
 limit 1");
 if($result = mysql_fetch_array($check_query)){
     //Sign in successfully
