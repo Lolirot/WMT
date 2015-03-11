@@ -1,10 +1,14 @@
 <?php
-/**
- * These are the database login details
- */
-define("HOST", "localhost");     // The host you want to connect to.
-define("USER", "ap307");    // The database username.
-define("PASSWORD", "abcap307354");    // The database password.
-define("DATABASE", "mysql-server-1");    // The database name.
+/*****************************
+*Database connection
+*****************************/
+$conn = @mysql_connect("localhost","user","password");
+if (!$conn){
+    die("Fail to connect to database:" . mysql_error());
+}
+mysql_select_db("fa", $conn);
 
+mysql_query("set character set 'utf-8'");
+
+mysql_query("set names 'utf-8'");
 ?>
