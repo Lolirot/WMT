@@ -27,7 +27,7 @@ if($result){
     //Sign in successfully
     $_SESSION['fa_username'] = $username;
     $_SESSION['id'] = $result['id'];
-    echo $FN," ", $LN,', Welcome to Wealth Manage Tool! Enter <a href="index.html">Home Page</a><br />';
+    echo $FN," ", $LN,', Welcome to Wealth Management Tool! Enter <a href="index.html">Home Page</a><br />';
     echo 'Click here <a href="login.php?action=logout">Sign out</a> <br />';
     exit;
 } else {
