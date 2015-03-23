@@ -43,11 +43,45 @@
       <li class="active"><a href="#">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
       <li><a href="StockMarket.html">Stock Market</a></li>
-      i ><a href="transHistory.php">Transactions History</a></li>
+      
+      <?php
+      
+      
+      
+      include('conn.php');
+
+	session_start();
+
+	$faid = $_SESSION['id'];
+	
+	if($faid == NULL){
+	
+	header("Location: Login.php");
+}
+		
+	$query = "SELECT fa_admin FROM financial_advisors WHERE id=$faid limit 1";
+	
+	$result = mysql_query($query) or die(mysql_error());
+	
+	while($row = mysql_fetch_array($result)){
+    
+
+     $boolean = $row['fa_admin'];
+   
+   
+}
+	
+	if($boolean == 1){
+		echo '
+       <li><a href="transHistory.php">Transactions History</a></li>
       <li><a href = "falist.php">FA List</a></li>
+      ';
+  }
+     ?> 
+      
     </ul>
    <ul class="nav navbar-nav navbar-right">
-        <li><a href="Login.html">Log out</a></li>
+        <li><a href="Login.php">Log out</a></li>
    </ul>
   </div>
 </nav>
@@ -110,3 +144,4 @@
 <!-- end footer -->
 </body>
 </html>
+

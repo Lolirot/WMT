@@ -86,8 +86,8 @@ if($result){
     $_SESSION['fa_username'] = $username;
     $_SESSION['id'] = $result['id'];
     
-    echo "<meta http-equiv=\"refresh\" content=\"3; url = index.html\" >";
-    echo $FN," ", $LN,', Welcome to Wealth Management Tool! It will auto turn to Home Page or click <a href="index.html">Home Page</a><br />';
+    echo "<meta http-equiv=\"refresh\" content=\"3; url = index.php\" >";
+    echo $FN," ", $LN,', Welcome to Wealth Management Tool! It will auto turn to Home Page or click <a href="index.php">Home Page</a><br />';
     echo 'You also can click here <a href="login.php?action=logout">Sign out</a> <br />';    
 
     

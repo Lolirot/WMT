@@ -37,7 +37,7 @@
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
-      <li class="active"><a href="#about">Clients</a></li>
+      <li><a href="Clients.php">Clients</a></li>
       <li ><a href="StockMarket.html">Stock Market</a></li>
       
       <?php
@@ -70,7 +70,7 @@
 	if($boolean == 1){
 		echo '
        <li><a href="transHistory.php">Transactions History</a></li>
-      <li><a href = "falist.php">FA List</a></li>
+      <li class="active"><a href = "falist.php">FA List</a></li>
       ';
   }
      ?> 
@@ -125,7 +125,6 @@
 include('conn.php');
 
 
-
 $username = $_SESSION['id'];
 
 if($username == NULL){
@@ -133,26 +132,7 @@ if($username == NULL){
 	header("Location: Login.php");
 }
 
-$query = "SELECT fa_admin FROM financial_advisors WHERE id=$faid limit 1";
-	
-	$result = mysql_query($query) or die(mysql_error());
-	
-	while($row = mysql_fetch_array($result)){
-    
-
-     $boolean = $row['fa_admin'];
-   
-   
-}
-	
-	if($boolean == 1){
-		
-		$query = "SELECT * FROM customers"; 
-	}
-	else {
-$query = "SELECT * FROM customers WHERE faid = $username"; 
-
-}
+$query = "SELECT * FROM financial_advisors"; 
 
 $result = mysql_query($query) or die(mysql_error());
 
@@ -162,16 +142,16 @@ while($row = mysql_fetch_array($result)){
 
  echo "<tr>";
    echo "<td>";
-    echo $row['first_name'];
+    echo $row['fa_first_name'];
    echo "</td>";
  
  
  echo "<td>";
-  echo $row['last_name']; 
+  echo $row['fa_last_name']; 
   echo "</td>";
     
     echo "<td>";
-    echo $row['phone_number'];
+    echo $row['fa_phone_no'];
      echo "</td>";
     
     $id = $row['id'];
@@ -230,7 +210,7 @@ while($row = mysql_fetch_array($result)){
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="phone" placeholder="Telephone" required>
+      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
     </div>
   </div>
 
