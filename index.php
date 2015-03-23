@@ -26,7 +26,7 @@
 <body>
 <!-- start header -->
 <div id="header">
-<img src="images/logo.png" alt="Smiley face"></img>
+<a href="index.php"> <img src="images/logo.png" alt="Smiley face"></img></a>
 <p>Wealth Management Tool</p>
 <!-- end header -->
 </div>
@@ -47,9 +47,11 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li class="active"><a href="#about">Clients</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
+      <li ><a href="#about">Clients</a></li>
       <li ><a href="StockMarket.html">Stock Market</a></li>
+      <li ><a href="transHistory.php">Transactions History</a></li>
+      <li><a href = "falist.php">FA List</a></li>
       
     </ul>
   </div>
