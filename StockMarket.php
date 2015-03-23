@@ -10,41 +10,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<script>
-function buy()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
-	}
-	else
-	{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	var quantity = document.getElementsByName('quantity')[0].value;
-        var symbol = document.getElementsByName('symbol')[0].value;
-        var first = document.getElementsByName('first')[0].value;
-	xmlhttp.open("GET","buy.php?amount="+quantity+"stock="+symbol+"first="+first,true);
-}
-
-function sell()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
-	}
-	else
-	{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	var quantity = document.getElementsByName('quantity')[0].value;
-	var symbol = document.getElementsByName('symbol')[0].value;
-        var first = document.getElementsByName('first')[0].value;
-	xmlhttp.open("GET","sell.php?amount="+quantity+"stock="+symbol+"first="+first,true);
-}
-</script>
 <link href="default.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
@@ -84,6 +49,7 @@ function sell()
 <div class="panel-body">
 <?php
 $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
+//echo '<textarea name="id" cols="25" rows="1">Enter stock symbol</textarea>';
 $yql_query = "select symbol,PreviousClose,Name from yahoo.finance.quotes where symbol in ('YHOO','AAPL','GOOG','MSFT')";
 $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
 $session = curl_init($yql_query_url);
@@ -119,16 +85,56 @@ echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z
 <h3 class="panel-title">Buy/Sell Stocks</h3>
 </div>
 <div class="panel-body">
-<textarea name="id" cols="25" rows="1">Enter customer id</textarea>
+<textarea name="custid" cols="25" rows="1">Enter customer id</textarea>
 <textarea name="symbol" cols="25" rows="1">Enter stock symbol</textarea>
 <textarea name="quantity" cols="25" rows="1">Enter quantity</textarea>
-<h1>Buy</h1>
-<input type='text' value="Enter quantity to buy">
-<INPUT TYPE=BUTTON OnClick="buy()" VALUE="buy">
-<h1>Sell</h1>
-<input type='text' value="Enter quantity to sell">
-<INPUT TYPE=BUTTON OnClick="sell()" VALUE="sell">
+<input type=button onclick="buy()" value="BUY">
+<input type=button onclick="sell()" value="SELL">
 </div>
 </div>
 </div>
+<script>
+function buy()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var quantity = document.getElementsByName('quantity')[0].value;
+        var symbol = document.getElementsByName('symbol')[0].value;
+        var cid = document.getElementsByName('custid')[0].value;
+	xmlhttp.open("GET","buy.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
+	xmlhttp.send();
+	alert("Stocks purchased");
+}
+
+function sell()
+{
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var quantity = document.getElementsByName('quantity')[0].value;
+	var symbol = document.getElementsByName('symbol')[0].value;
+        var cid = document.getElementsByName('custid')[0].value;
+	xmlhttp.open("GET","sell.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
+	xmlhttp.send();
+	alert("Stocks sold");
+}
+
+function searchStocks()
+{
+
+}
+</script>
 </body>
