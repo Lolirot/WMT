@@ -176,7 +176,7 @@ while($row = mysql_fetch_array($result)){
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
+      <input type="text" class="form-control" name="phone" placeholder="Telephone" required>
     </div>
   </div>
 

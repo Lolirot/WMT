@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1); 
 session_start();
 include ("dbfunctions.php");
-include('conn.php');
 //print first part of html
 ?>
 <!DOCTYPE html
@@ -11,11 +10,11 @@ include('conn.php');
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head> 
-  <title>Add Customer</title>
+  <title>Update Customer</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
-<h1>The data has been successfully entered into our database.</h1>
+<h1>The data has been removed from the database.</h1>
 <p>
 	
 	<script>
@@ -30,32 +29,31 @@ include('conn.php');
 
 //////////////////////////////////////////////////////////////////////////////
 //retrieve username and password
+$username = "ap307";
+$password = "abcap307354";
 
 
-$username = $_SESSION['id'];
+//connect to database
+dbConnect("$username", "$password") ;
+dbSelect("$username");
 
 
 //////////////////////////////////////////////////////////////////////////////
 //First pick up the parameters from the form 
 
-
-$firstName = $_POST["firstname"];
-$lastName = $_POST["lastname"];
-$address = $_POST["address"];
-$emailaddress = $_POST["email"];
-$phone = $_POST["phone"];
+$id = $_POST["id"];
 
 
-$query = "INSERT INTO customers (first_name,last_name,phone_number,email_address,address,faid) VALUES ('$firstName', '$lastName', '$phone', '$emailaddress',
-                              '$address', $username)";
+//$query = "DELETE FROM customers WHERE id=$id";
+$query = "UPDATE customers SET faid=3 WHERE id=$id";
 
 //remove this line when query comes out looking ok
-print $query . '<br/>';
+
 
 $insResult = mysql_query($query);
 if ($insResult)
 {
-   print("Customer details for " . $firstName . " " . $lastName . " have been inserted<br/>");
+   print("Customer removed");
 }
 else
 
@@ -70,6 +68,3 @@ print "</p></body>";
 print "</html>";
 
 ?>
-
-
-
