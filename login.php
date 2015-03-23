@@ -70,9 +70,11 @@ if(!isset($_POST['submit'])){
 }
 $username = ($_POST['username']);
 $password = ($_POST['password']);
-
+$_SESSION['fa_username'] = 'null';
+    $_SESSION['id'] = 'null';
 //Include database conncetion file
 include('conn.php');
+	
 //Check if the username and pasasword are correct
 $check_query = mysql_query("SELECT * FROM financial_advisors WHERE fa_username='$username' AND fa_password='$password' 
 limit 1");

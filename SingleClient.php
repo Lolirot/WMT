@@ -43,7 +43,7 @@
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
       <li><a href="index.html">Home</a></li>
-      <li class="active"><a href="#">Clients</a></li>
+      <li class="active"><a href="Clients.php">Clients</a></li>
       <li><a href="StockMarket.html">Stock Market</a></li>
       
     </ul>
@@ -83,15 +83,15 @@
     
     include ("dbfunctions.php");
 //retrieve username and password
-$username = "ap307";
-$password = "abcap307354";
+include('conn.php');
 
+session_start();
 
-//connect to database
-dbConnect("$username", "$password") ;
-dbSelect("$username");
+$faid = $_SESSION['id'];
 
 $id = $_POST["id"];
+
+$_SESSION['currentclient'] = $id;
 
 $query = "SELECT * FROM customers WHERE id=$id"; 
 
@@ -103,24 +103,29 @@ while($row = mysql_fetch_array($result)){
  echo "<tr>";
    echo "<td>";
     echo $row['first_name'];
+    $fname = $row['first_name'];
    echo " ";
-  echo $row['last_name']; 
+  echo $row['last_name'];
+  $lname = $row['last_name']; 
 	echo "</td>";
     
     echo "<td>";
     echo $row['phone_number'];
+    $phonenum = $row['phone_number'];
      echo "</td>";
      
    echo "<td>";
     echo $row['email_address'];
+    $eaddress = $row['email_address'];
    echo "</td>";
  
  
  echo "<td>";
-  echo $row['address']; 
+  echo $row['address'];
+   $address = $row['address']; 
   echo "</td>";
     
-    $query2 = "SELECT * FROM financial_advisors WHERE id=1"; 
+    $query2 = "SELECT * FROM financial_advisors WHERE id=$faid"; 
 
 $result2 = mysql_query($query2) or die(mysql_error());
 
@@ -148,29 +153,30 @@ while($row2 = mysql_fetch_array($result2)){
   <form class="form-horizontal" id="update" action="updateCustomer.php" method="post">
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="firstname" placeholder="First Name">
+      <input type="text" class="form-control" name="firstname" value="<?php echo $fname; ?>" >
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+      <input type="text" class="form-control" name="lastname" value="<?php echo $lname; ?>">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" placeholder="Email Address">
+      <input type="text" class="form-control" name="phone" value="<?php echo $phonenum; ?>">
+    </div>
+  </div> 
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="email" value="<?php echo $eaddress; ?>">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="address" placeholder="Home Address ">
+      <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone/Mobile">
-    </div>
-  </div>
+ 
   
   
   <div class="form-group">
@@ -241,16 +247,82 @@ while($row = mysql_fetch_array($result)){
   
   
 </div>
+
+<div>
+
+Balance:
+
+<b id="balance">
+
+<?php
+
+$faid = $_SESSION['id'];
+
+$balance = "SELECT * FROM customers WHERE id=$faid";
+
+$result = mysql_query($balance) or die(mysql_error());
+
+while($row = mysql_fetch_array($result)){
+
+$custBalance =  $row['balance']; 
+
+echo $custBalance;
+}
+
+?>
+</b>
+
+<br></br>
+
+<input id="newbalance" type="number" name="change" /> 
+<button onclick="withdraw()">Withdraw</button>
+<input id="add" type="submit" name="add" value="add" />
+
+<script>
+function withdraw() {
+    var x = document.getElementById("newbalance").value;
+    
+    var xhr;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    else {
+        throw new Error("Ajax is not supported by this browser");
+    }
+    // 1. Create XHR instance - End
+    
+    // 2. Define what to do when XHR feed you the response from the server - Start
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status == 200 && xhr.status < 300) {
+                document.getElementById('balance').innerHTML = xhr.responseText;
+            }
+        }
+    }
+    
+
+    // 3. Specify your action, location and Send to the server - Start 
+    xhr.open('POST', 'withdraw.php');
+    xhr.setRequestHeader("Content-Type", "text");
+    xhr.send("newbalance=" + x);
+    //document.getElementById("balance").innerHTML = x;
+}
+</script>
+
+</div>
+
 </div>
 <script>
 	
-	$("#update").hide();
+	
 
-$("#updatebutton").click(function(e) {
-    $("#update").show();
-
-    e.preventDefault();
-});
+  $("#update").hide(); //Initially form wil be hidden.
+  $("#updatebutton").click(function() {
+    $("#update").toggle();//Form toggles on button click
+  });
 
 
 
