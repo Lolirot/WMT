@@ -42,7 +42,7 @@
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="Login.html">Log out</a></li>
+        <li><a href="Login.php">Log out</a></li>
    </ul>
   </div>
 </nav>
@@ -85,17 +85,20 @@
     
     include ("dbfunctions.php");
 //retrieve username and password
-$username = "ap307";
-$password = "abcap307354";
 
 
-//connect to database
-dbConnect("$username", "$password") ;
-dbSelect("$username");
+include('conn.php');
 
+session_start();
 
+$username = $_SESSION['id'];
 
-$query = "SELECT * FROM customers"; 
+if($username == NULL){
+	
+	header("Location: Login.php");
+}
+
+$query = "SELECT * FROM customers WHERE faid = $username"; 
 
 $result = mysql_query($query) or die(mysql_error());
 
@@ -173,20 +176,10 @@ while($row = mysql_fetch_array($result)){
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone/Mobile" required>
+      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <div class="input-group-addon">£</div>
-      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="checkbox-horizontal">
-  <input type="checkbox" id="inlineCheckbox1" value="option1" required> Confirm Amount
-</label>
-  </div>
+
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
