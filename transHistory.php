@@ -69,8 +69,8 @@
 	
 	if($boolean == 1){
 		echo '
-       <li><a href="transHistory.php">Transactions History</a></li>
-      <li class="active"><a href = "falist.php">FA List</a></li>
+       <li class="active"><a href="transHistory.php">Transactions History</a></li>
+      <li><a href = "falist.php">FA List</a></li>
       ';
   }
      ?> 
@@ -92,7 +92,7 @@
     <h3 class="panel-title">Latest Tweets</h3>
   </div>
   <div class="panel-body">
-                           <a class="twitter-timeline"  href="https://twitter.com/Lolirotten_" data-widget-id="556888036668358656">Tweets by @Lolirotten_</a>
+                           <a class="twitter-timeline"  href="https://twitter.com/hashtag/finance" data-widget-id="556888036668358656">#Finance</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           
           
@@ -111,9 +111,10 @@
     <table class="table table-condensed">
     <thead>
 <tr>
-<th>Name</th>
-<th>Surname</th>
-<th>Telephone</th>
+<th>Customer ID</th>
+<th>Date of Transaction</th>
+<th>Amount</th>
+<th>Financial Advisor ID</th>
 </tr>
 </thead>
   <?php
@@ -125,6 +126,7 @@
 include('conn.php');
 
 
+
 $username = $_SESSION['id'];
 
 if($username == NULL){
@@ -132,7 +134,10 @@ if($username == NULL){
 	header("Location: Login.php");
 }
 
-$query = "SELECT * FROM financial_advisors"; 
+
+$query = "SELECT * FROM transaction_histories"; 
+
+
 
 $result = mysql_query($query) or die(mysql_error());
 
@@ -142,30 +147,25 @@ while($row = mysql_fetch_array($result)){
 
  echo "<tr>";
    echo "<td>";
-    echo $row['fa_first_name'];
+    echo $row['customer_id'];
    echo "</td>";
  
  
  echo "<td>";
-  echo $row['fa_last_name']; 
+  echo $row['date_of_trans']; 
   echo "</td>";
     
     echo "<td>";
-    echo $row['fa_phone_no'];
+    echo $row['amount'];
+     echo "</td>";
+     
+     echo "<td>";
+    echo $row['fa_id'];
      echo "</td>";
     
     $id = $row['id'];
     
     
-    echo  '<td>
-    
-    
-<form action="SingleFA.php" method="post">
-<button type="submit" value="'.$id.'" name="id" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-</button>
-</form>
-	</td>';
   echo "</tr>";
    
 }
@@ -179,45 +179,8 @@ while($row = mysql_fetch_array($result)){
 
 <div class="col-xs-6 col-md-3">
 <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Add New Client</h3>
-  </div>
   <div class="panel-body">
-  <form class="form-horizontal" action="addCustomer.php" method="post">
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="firstname" placeholder="First Name" required">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" placeholder="Email Address" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="address" placeholder="Home Address " required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
-    </div>
-  </div>
-
   
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Add Client</button>
-    </div>
-  </div>
-
-</form>
           
           
   </div>

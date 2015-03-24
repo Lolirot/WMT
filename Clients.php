@@ -114,6 +114,14 @@
 <th>Name</th>
 <th>Surname</th>
 <th>Telephone</th>
+<?php
+
+if($boolean == 1){
+echo '
+<th>Financial Advisor</th> ';
+}
+
+?>
 </tr>
 </thead>
   <?php
@@ -147,7 +155,7 @@ $query = "SELECT fa_admin FROM financial_advisors WHERE id=$faid limit 1";
 	
 	if($boolean == 1){
 		
-		$query = "SELECT * FROM customers"; 
+		$query = "SELECT * FROM customers ORDER BY faid"; 
 	}
 	else {
 $query = "SELECT * FROM customers WHERE faid = $username"; 
@@ -173,6 +181,14 @@ while($row = mysql_fetch_array($result)){
     echo "<td>";
     echo $row['phone_number'];
      echo "</td>";
+     
+     if($boolean == 1){
+     
+     echo "<td>";
+    echo $row['faid'];
+     echo "</td>";
+     
+ }
     
     $id = $row['id'];
     
@@ -230,9 +246,11 @@ while($row = mysql_fetch_array($result)){
   </div>
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="phone" placeholder="Telephone" required>
+      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
     </div>
   </div>
+  
+  
 
   
   <div class="form-group">

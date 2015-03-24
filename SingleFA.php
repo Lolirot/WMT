@@ -42,8 +42,8 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li class="active"><a href="Clients.php">Clients</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="Clients.php">Clients</a></li>
       <li><a href="StockMarket.html">Stock Market</a></li>
       
       <?php
@@ -76,7 +76,7 @@
 	if($boolean == 1){
 		echo '
        <li><a href="transHistory.php">Transactions History</a></li>
-      <li><a href = "falist.php">FA List</a></li>
+      <li class="active"><a href = "falist.php">FA List</a></li>
       ';
   }
      ?> 
@@ -107,9 +107,8 @@
 <tr>
 <th>Name</th>
 <th>Telephone</th>
-<th>Email Address</th>
 <th>Address</th>
-<th>Financial Advisor</th>
+<th>Username</th>
 </tr>
 </thead>
   
@@ -126,7 +125,7 @@ $faid = $_SESSION['id'];
 
 $id = $_POST["id"];
 
-$_SESSION['currentclient'] = $id;
+$_SESSION['currentFA'] = $id;
 
 
 if($faid == NULL){
@@ -134,7 +133,7 @@ if($faid == NULL){
 	header("Location: Login.php");
 }
 
-$query = "SELECT * FROM customers WHERE id=$id"; 
+$query = "SELECT * FROM financial_advisors WHERE id=$id"; 
 
 $result = mysql_query($query) or die(mysql_error());
 
@@ -143,45 +142,29 @@ while($row = mysql_fetch_array($result)){
 
  echo "<tr>";
    echo "<td>";
-    echo $row['first_name'];
-    $fname = $row['first_name'];
+    echo $row['fa_first_name'];
+    $fname = $row['fa_first_name'];
    echo " ";
-  echo $row['last_name'];
-  $lname = $row['last_name']; 
+  echo $row['fa_last_name'];
+  $lname = $row['fa_last_name']; 
 	echo "</td>";
     
     echo "<td>";
-    echo $row['phone_number'];
-    $phonenum = $row['phone_number'];
+    echo $row['fa_phone_no'];
+    $phonenum = $row['fa_phone_no'];
      echo "</td>";
      
+     echo "<td>";
+  echo $row['fa_address'];
+   $address = $row['fa_address']; 
+  echo "</td>";
+     
    echo "<td>";
-    echo $row['email_address'];
-    $eaddress = $row['email_address'];
+    echo $row['fa_username'];
+    $username = $row['fa_username'];
    echo "</td>";
  
  
- echo "<td>";
-  echo $row['address'];
-   $address = $row['address']; 
-  echo "</td>";
-  
-  $advisor = $row['faid'];
-    
-    $query2 = "SELECT * FROM financial_advisors WHERE id=$advisor"; 
-
-$result2 = mysql_query($query2) or die(mysql_error());
-
-while($row2 = mysql_fetch_array($result2)){
-    ;
-   echo "<td>";
-    echo $row2['fa_first_name'];
-   echo " ";
-  echo $row2['fa_last_name']; 
-	echo "</td>";
-   
-    
-  } 
    
   echo "</tr>";
   
@@ -193,7 +176,7 @@ while($row2 = mysql_fetch_array($result2)){
    </table>
   </div>
   
-  <form class="form-horizontal" id="update" action="updateCustomer.php" method="post">
+  <form class="form-horizontal" id="update" action="updateFA.php" method="post">
   <div class="form-group">
     <div class="col-sm-10">
       <input type="text" class="form-control" name="firstname" value="<?php echo $fname; ?>" >
@@ -211,41 +194,11 @@ while($row2 = mysql_fetch_array($result2)){
   </div> 
   <div class="form-group">
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" value="<?php echo $eaddress; ?>">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
       <input type="text" class="form-control" name="address" value="<?php echo $address; ?>">
     </div>
   </div>
- <?php
- if($boolean == 1){
-  echo '<div class="form-group">';
-    echo '<div class="col-sm-10">';
 
-
-include('conn.php');
-
-//find all the spymaster codenames
-$query = 'SELECT id,fa_first_name,fa_last_name FROM financial_advisors';
-$result = runQuery($query);
- 
-//start with blank entry in option box
-print '<select name = "advisor"> <option value = ""> </option>';
-//put each item into an option box
-while ($row = mysql_fetch_row($result) )
-{
-   print '<option value="' . $row[0 ] . '">' . $row[1] . ' ' . $row[2] . ' </option>';
-}
-print '</select>';
-
-
-echo '</div>';
- echo '</div>';
-}
   
-  ?>
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -264,15 +217,15 @@ echo '</div>';
 <div class="col-md-4">
 	<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Client Stocks</h3>
+    <h3 class="panel-title">Transaction History</h3>
   </div>
   <div class="panel-body">
 	  <table class="table table-condensed">
   <thead>
 <tr>
-<th>Company</th>
-<th>Number of Shares</th>
-<th>History Ref</th>
+<th>Customer ID</th>
+<th>Date of Trans</th>
+<th>Amount</th>
 </tr>
 </thead>
   
@@ -282,7 +235,7 @@ echo '</div>';
 
 $id = $_POST["id"];
 
-$query = "SELECT * FROM customer_stocks WHERE customer_id=$id"; 
+$query = "SELECT * FROM transaction_histories WHERE fa_id=$id"; 
 
 $result = mysql_query($query) or die(mysql_error());
 
@@ -291,15 +244,15 @@ while($row = mysql_fetch_array($result)){
 
  echo "<tr>";
    echo "<td>";
-    echo $row['company'];
+    echo $row['customer_id'];
 	echo "</td>";
     
     echo "<td>";
-    echo $row['shares_no'];
+    echo $row['date_of_trans'];
      echo "</td>";
      
    echo "<td>";
-    echo $row['history_ref'];
+    echo $row['amount'];
    echo "</td>";
  
  
@@ -320,87 +273,7 @@ while($row = mysql_fetch_array($result)){
 
 <div>
 
-Balance: $
 
-<b id="balance">
-
-<?php
-
-
-$balance = "SELECT * FROM customers WHERE id=$id";
-
-
-
-$result3 = mysql_query($balance) or die(mysql_error());
-
-
-
-while($row2 = mysql_fetch_array($result3)){
-
-$custBalance =  $row2['balance']; 
-
-echo $custBalance;
-}
-
-?>
-
-</b>
-
-<br></br>
-
-<input id="newbalance" type="number" name="change" /> 
-<button id="withdrawbutton">Withdraw Funds</button>
-<button id="addfunds">Add Funds</button>
-
-
-<script type="text/javascript">
- 
-    
-    $(document).ready(function(){
-        $("#withdrawbutton").click(function(){
-			var x = document.getElementById("newbalance").value;
-			var y = document.getElementById("balance").value;
-            $.ajax({
-                url: "withdraw.php",
-                type: "POST",
-                data: {newbalance: document.getElementById("newbalance").value}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
-                success: function(msg){
-                    alert("Funds Successfully withdrawn");
-                    
-                     document.getElementById('reloader').submit();
-                }
-            });
-            
-           
-                     
-        });
-    });
-</script>
-
-<script type="text/javascript">
- 
-    
-    $(document).ready(function(){
-        $("#addfunds").click(function(){
-			var x = document.getElementById("newbalance").value;
-			var y = document.getElementById("balance").value;
-            $.ajax({
-                url: "addfunds.php",
-                type: "POST",
-                data: {newbalance: document.getElementById("newbalance").value}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
-                success: function(msg){
-                    alert("Funds Successfully Added");
-                    
-                     document.getElementById('reloader').submit();
-                }
-            });
-            
-            
-                     
-                    
-        });
-    });
-</script>
 
 <form name="RefreshForm" id="reloader" method="post" action="SingleClient.php">
     <input type="hidden" name="id" value=" <?php echo $_POST["id"];  ?> ">
@@ -424,3 +297,4 @@ echo $custBalance;
 </script>
 
 </body>
+
