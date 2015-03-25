@@ -85,7 +85,31 @@ echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z
 <h3 class="panel-title">Buy/Sell Stocks</h3>
 </div>
 <div class="panel-body">
-<textarea name="custid" cols="25" rows="1">Enter customer id</textarea>
+<?php
+include ("dbfunctions.php");
+include('conn.php');
+$faid = $_SESSION['id'];
+$username = "ap307";
+$password = "abcap307354";
+dbConnect("$username", "$password");
+dbSelect("$username");
+echo '<select name="custid">';
+$faquery1 = "SELECT `first_name` FROM `customers` WHERE faid = '$faid'";
+$cust_first = mysql_query($faquery1) or die(mysql_error());
+$cust_list_first = mysql_fetch_array($cust_first);
+$faquery2 = "SELECT `last_name` FROM `customers` WHERE faid = '$faid'";
+$cust_last = mysql_query($faquery2) or die(mysql_error());
+$cust_list_last = mysql_fetch_array($cust_last);
+$faquery3 = "SELECT `id` FROM `customers` WHERE faid = '$faid'";
+$cid = mysql_query($faquery3) or die(mysql_error());
+$cid_list = mysql_fetch_array($cid);
+$n = sizeof($cust_list);
+for ($i = 0;$i < $n;$i++)
+{
+	echo "<option value='$cid_list[$i]'>$cust_list_first[$i] $cust_list_last[$i]</option>";
+}
+echo '</select>';
+?>
 <textarea name="symbol" cols="25" rows="1">Enter stock symbol</textarea>
 <textarea name="quantity" cols="25" rows="1">Enter quantity</textarea>
 <input type=button onclick="buy()" value="BUY">
