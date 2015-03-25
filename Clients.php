@@ -38,7 +38,7 @@
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
       <li class="active"><a href="#about">Clients</a></li>
-      <li ><a href="StockMarket.html">Stock Market</a></li>
+      <li ><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
