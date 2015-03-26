@@ -66,7 +66,10 @@
 			
 			select: function(start, end) 
 			{
-				
+				var startTime = start.toISOString();
+        		var endTime = end.toISOString();
+        		$('#start').attr("value",startTime);
+        		$('#end').attr("value",endTime);
 				$('#calendarModal').modal('toggle');
 				//$('#calendar').fullCalendar('unselect');
 			},
@@ -182,15 +185,17 @@
 	        <h4 class="modal-title"><b>Please enter your details</b></h4>
       	</div>
       <div class="modal-body">
-		  <form role="form" action="add_events.php">
+		  <form role="form" action="add_events.php" method="post">
 		    <div class="form-group">
 		      	<label for="title">Title:</label>
-		      	<input class="form-control" id="title" name="title" placeholder="Title">
+		      	<input class="form-control" id="title" name="title" placeholder="Title" required>
 		    </div>
 		    <div>
 		    	<label for="title">Url:</label>
 		      	<input class="form-control" id="url" name="url" placeholder="url">
 		    </div>
+				<input type="hidden" id="start" name = "start">
+				<input type="hidden" id="end" name = "end">
 		    <div class="form-group">
 		      	<label for="notes">Additonal Notes:</label>
 		      	<textarea class="form-control" id="notes" name="notes" placeholder="Note"></textarea>
