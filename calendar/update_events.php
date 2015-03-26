@@ -20,7 +20,7 @@ try
 	}
 
 // update the records
-$sql = "UPDATE evenement SET title=?, start=?, end=? WHERE id=?";
+$sql = "UPDATE events SET title=?, start=?, end=? WHERE id=?";
 $q = $bdd->prepare($sql);
 $q->execute(array($title,$start,$end,$id));
 

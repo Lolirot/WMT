@@ -20,7 +20,7 @@ try
 	}
 	
 // insert the records
-$sql = "INSERT INTO evenement (title, start, end, url) VALUES (:title, :start, :end, :url)";
+$sql = "INSERT INTO events (title, start, end, url) VALUES (:title, :start, :end, :url)";
 $q = $bdd->prepare($sql);
 $q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end,  ':url'=>$url));
 
