@@ -77,8 +77,8 @@
         		//alert('Start: ' + calEvent.start);
         		//alert('View: ' + view.name);
         		var title = calEvent.title;
-        		var startTime = calEvent.start;
-        		var endTime = calEvent.end;
+        		var startTime = calEvent.start.toString();
+        		var endTime = calEvent.end.toString();
         		document.getElementById("titleDiv").innerHTML = "Title: " + title;
         		document.getElementById("startDiv").innerHTML = "Start: " + startTime;
         		document.getElementById("endDiv").innerHTML = "End: " + endTime;
@@ -182,14 +182,18 @@
 	        <h4 class="modal-title"><b>Please enter your details</b></h4>
       	</div>
       <div class="modal-body">
-		  <form role="form" action="">
+		  <form role="form" action="add_events.php">
 		    <div class="form-group">
-		      <label for="title">Title:</label>
-		      <input class="form-control" id="title" name="title" placeholder="">
+		      	<label for="title">Title:</label>
+		      	<input class="form-control" id="title" name="title" placeholder="Title">
+		    </div>
+		    <div>
+		    	<label for="title">Url:</label>
+		      	<input class="form-control" id="url" name="url" placeholder="url">
 		    </div>
 		    <div class="form-group">
-		      <label for="notes">Additonal Notes:</label>
-		      <textarea class="form-control" id="notes" name="title" placeholder=""></textarea>
+		      	<label for="notes">Additonal Notes:</label>
+		      	<textarea class="form-control" id="notes" name="notes" placeholder="Note"></textarea>
 		    </div>
 		    <button type="submit" class="btn btn-default">Submit</button>
 		  </form>

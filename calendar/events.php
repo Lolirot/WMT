@@ -18,8 +18,7 @@ try
 	}
 
  // Query that retrieves events
- // rename "evenment" to our db table
- $query = "SELECT * FROM evenement ORDER BY id";
+ $query = "SELECT * FROM events ORDER BY id";
 
  // Execute the query
   $result = $bdd->query($query) or die(print_r($bdd->errorInfo()));
