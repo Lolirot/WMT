@@ -1,5 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<script>
+    setTimeout(function(){
+       window.location='Clients.php';
+    }, 3000);
+</script>
+</html>
 <?php
 
+include('conn.php');
 //test user
 $user = "ap307";
 $pass = "abcap307354";
@@ -10,18 +18,18 @@ $start = $_POST['start'];
 $end = $_POST['end'];
 $url = $_POST['url'];
 
-//connect to db
-try 
-	{
-		$bdd = new PDO("mysql-server-1", $user , $pass);
-	} catch(Exception $e)
-	{
-		exit('Unable to connect to database.');
-	}
-	
-// insert the records
-$sql = "INSERT INTO events (title, start, end, url) VALUES (:title, :start, :end, :url)";
-$q = $bdd->prepare($sql);
-$q->execute(array(':title'=>$title, ':start'=>$start, ':end'=>$end,  ':url'=>$url));
+$query = "INSERT INTO events (id, title, notes, start, end, url, allDay) VALUES ('$title','$start','$end','$url')";
 
+print $query . '<br/>';
+
+$insResult = mysql_query($query);
+if ($insResult)
+{
+   print("Customer details for " . $firstName . " " . $lastName . " have been inserted<br/>");
+}
+else
+	exit ( mysql_error(). "</p></body></html>" )
+
+print "</p></body>";
+print "</html>";
 ?>
