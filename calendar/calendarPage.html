@@ -43,28 +43,49 @@
 			selectHelper: true,
 			defaultView: 'agendaWeek',
 
+			events: 
+			[
+		        {
+		            title: 'Work out',
+		            start: '2015-03-26T08:30:00',
+		            end: '2015-03-26T09:30:00'
+		        },
+		        {
+		            title: 'Gon get me some shoes',
+		            start: '2015-03-26T14:30:00',
+		            end: '2015-03-26T15:30:00'
+		        },
+		        {
+		            title: 'Meeting with Tom',
+		            start: '2015-03-26T10:30:00',
+		            end: '2015-03-26T12:30:00'
+		        }
+    		],
+
 			//events: "events.php"
 			
 			select: function(start, end) 
 			{
 				
 				$('#calendarModal').modal('toggle');
-				//Prompt that requests a title, possibly change to a bootstrap prompt with start and end fields
-				/*var title = prompt('Please enter the title of your event:');
-				var eventData;
-				if (title) 
-				{
-					eventData = 
-					{
-						title: title,
-						start: start,
-						end: end
-					};
-					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-				}*/
-				//where calls to add to db will go
 				//$('#calendar').fullCalendar('unselect');
 			},
+
+			eventClick: function(calEvent, jsEvent, view)
+			{
+				//alert('Event: ' + calEvent.title);
+        		//alert('Start: ' + calEvent.start);
+        		//alert('View: ' + view.name);
+        		var title = calEvent.title;
+        		var startTime = calEvent.start;
+        		var endTime = calEvent.end;
+        		document.getElementById("titleDiv").innerHTML = "Title: " + title;
+        		document.getElementById("startDiv").innerHTML = "Start: " + startTime;
+        		document.getElementById("endDiv").innerHTML = "End: " + endTime;
+        		$('#infoModal').modal('toggle');
+			}
+
+
 		});
 		
 	});
@@ -124,10 +145,10 @@
 	}
 
 </style>
-<div id="calendarBody">
-
-	<div id='calendar'></div>
-
+<div class="container" style="overflow-x:hidden">
+	<div id="calendarBody">
+		<div id='calendar'></div>
+	</div>
 </div>
 
 
@@ -139,10 +160,12 @@
 <!-- ----------------------------------------------------Calendar Modal------------------------------ -->
 <div id="calendarModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body" style="font-family:Arial" >
-		  <h2>Enter your event details</h2>
-		  </br>
+    <div class="modal-content" style="font-family:Arial">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title"><b>Please enter your details</b></h4>
+      	</div>
+      <div class="modal-body">
 		  <form role="form" action="">
 		    <div class="form-group">
 		      <label for="title">Title:</label>
@@ -150,7 +173,7 @@
 		    </div>
 		    <div class="form-group">
 		      <label for="notes">Additonal Notes:</label>
-		      <input class="form-control" id="notes" name="title" placeholder="">
+		      <textarea class="form-control" id="notes" name="title" placeholder=""></textarea>
 		    </div>
 		    <button type="submit" class="btn btn-default">Submit</button>
 		  </form>
@@ -159,6 +182,24 @@
   </div>
 </div>
 <!-- -----------------------------------------------End of Calendar Modal---------------------------- -->
+
+<!-- ----------------------------------------------------Info Modal------------------------------ -->
+<div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" style="font-family:Arial">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title"><b>Event Information</b></h4>
+      	</div>
+      <div class="modal-body">
+		<div id="titleDiv"></</div>
+		<div id="startDiv"></div>
+		<div id="endDiv"></div>
+	  </div>
+    </div>
+  </div>
+</div>
+<!-- -----------------------------------------------End of Info Modal---------------------------- -->
 
 <!-- end footer -->
 </body>
