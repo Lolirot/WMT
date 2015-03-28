@@ -42,7 +42,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
-      <li><a href="StockMarket.html">Stock Market</a></li>
+      <li><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
@@ -124,7 +124,7 @@
   </div>
   <div class="panel-body">
     Display here events that are picked from the database, but selected for a specific date or range of dates or something.<br/><br/>
-    <a href="calendar/calendarPage.html">View Full Calendar</a>
+    <a href="calendarPage.html">View Full Calendar</a>
     </div>
 
     </div>

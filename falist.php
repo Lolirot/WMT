@@ -38,7 +38,7 @@
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
-      <li ><a href="StockMarket.html">Stock Market</a></li>
+      <li ><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
@@ -105,7 +105,7 @@
 <div class="col-xs-6 col-md-7">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Clients List</h3>
+    <h3 class="panel-title">FA List</h3>
   </div>
   <div class="panel-body">
     <table class="table table-condensed">
@@ -177,50 +177,7 @@ while($row = mysql_fetch_array($result)){
 </div>
 
 
-<div class="col-xs-6 col-md-3">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Add New Client</h3>
-  </div>
-  <div class="panel-body">
-  <form class="form-horizontal" action="addCustomer.php" method="post">
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="firstname" placeholder="First Name" required">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" placeholder="Email Address" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="text" class="form-control" name="address" placeholder="Home Address " required>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
-    </div>
-  </div>
 
-  
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Add Client</button>
-    </div>
-  </div>
-
-</form>
-          
-          
-  </div>
 </div>
 
 </div>

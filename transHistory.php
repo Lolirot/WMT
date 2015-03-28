@@ -38,7 +38,7 @@
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
-      <li ><a href="StockMarket.html">Stock Market</a></li>
+      <li ><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
@@ -105,7 +105,7 @@
 <div class="col-xs-6 col-md-7">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Clients List</h3>
+    <h3 class="panel-title">Transaction History</h3>
   </div>
   <div class="panel-body">
     <table class="table table-condensed">

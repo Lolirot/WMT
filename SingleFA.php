@@ -44,7 +44,7 @@
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
-      <li><a href="StockMarket.html">Stock Market</a></li>
+      <li><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
