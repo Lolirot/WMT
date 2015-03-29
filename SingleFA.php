@@ -75,7 +75,7 @@
 	
 	if($boolean == 1){
 		echo '
-       <li><a href="transHistory.php">Transactions History</a></li>
+       <li><a href="transHistory.php">Transaction History</a></li>
       <li class="active"><a href = "falist.php">FA List</a></li>
       ';
   }
