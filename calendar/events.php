@@ -1,29 +1,26 @@
 <?php
 include ("dbfunctions.php");
 
-//test user
+$dbhost = "mysql-server-1";
 $user = "ap307";
 $pass = "abcap307354";
+$dbname = "ap307";
 
-// List of events
- $json = array();
+$conn = mysql_connect("mysql-server-1","ap307","abcap307354");
+if (!$conn)
+{
+	die("Fail to connect to database:" . $conn->connect_error);
+}
+mysql_select_db("ap307", $conn);
 
-//connect to db
-try 
-	{
-		$bdd = new PDO("mysql-server-1", $user , $pass);
-	} catch(Exception $e)
-	{
-		exit('Unable to connect to database.');
-	}
+$query = "SELECT * FROM events";
 
- // Query that retrieves events
- $query = "SELECT * FROM events ORDER BY id";
+$result = mysql_query($query) or die(mysql_error());
+$arr = array();
+while($row = mysql_fetch_assoc($result))
+{
+	$arr[] = $row;
+}
 
- // Execute the query
-  $result = $bdd->query($query) or die(print_r($bdd->errorInfo()));
-
- // sending the encoded result to success page
- echo json_encode($result->fetchAll(PDO::FETCH_ASSOC));
-
+echo json_encode($arr);
 ?>

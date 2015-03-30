@@ -43,26 +43,44 @@
 			selectHelper: true,
 			defaultView: 'agendaWeek',
 
-			events: 
+			/*events: 
 			[
 		        {
 		            title: 'Work out',
-		            start: '2015-03-26T08:30:00',
-		            end: '2015-03-26T09:30:00'
+		            start: '2015-03-29T08:30:00',
+		            end: '2015-03-29T09:30:00'
 		        },
 		        {
 		            title: 'Gon get me some shoes',
-		            start: '2015-03-26T14:30:00',
-		            end: '2015-03-26T15:30:00'
+		            start: '2015-03-29T14:30:00',
+		            end: '2015-03-29T15:30:00'
 		        },
 		        {
 		            title: 'Meeting with Tom',
 		            start: '2015-03-26T10:30:00',
 		            end: '2015-03-26T12:30:00'
 		        }
-    		],
+    		],*/
 
-			//events: "events.php"
+			events: 
+			{
+				url:'events.php',
+				error: function()
+				{
+					alert('There was an error loading.');
+				}
+			},
+			
+			eventRender: function(event, element, view) 
+			{
+				if (event.allDay === 'true') 
+				{
+					event.allDay = true;
+				} else 
+					{
+						event.allDay = false;
+					}
+		   },
 			
 			select: function(start, end) 
 			{
@@ -194,8 +212,9 @@
 		    	<label for="title">Url:</label>
 		      	<input class="form-control" id="url" name="url" placeholder="url">
 		    </div>
-				<input type="hidden" id="start" name = "start">
-				<input type="hidden" id="end" name = "end">
+				<input type="hidden" id="start" name="start">
+				<input type="hidden" id="end" name="end">
+				<input type="hidden" id="fa" name="fa">
 		    <div class="form-group">
 		      	<label for="notes">Additonal Notes:</label>
 		      	<textarea class="form-control" id="notes" name="notes" placeholder="Note"></textarea>
