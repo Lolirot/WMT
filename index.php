@@ -124,7 +124,7 @@
   </div>
   <div class="panel-body">
     Display here events that are picked from the database, but selected for a specific date or range of dates or something.<br/><br/>
-    <a href="calendarPage.html">View Full Calendar</a>
+    <a href="calendar/calendarPage.html">View Full Calendar</a>
     </div>
 
     </div>
