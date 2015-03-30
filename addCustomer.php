@@ -3,7 +3,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1); 
 session_start();
 include ("dbfunctions.php");
-include('conn.php');
 //print first part of html
 ?>
 <!DOCTYPE html
@@ -21,18 +20,20 @@ include('conn.php');
 	<script>
     setTimeout(function(){
        window.location='Clients.php';
-    }, 3000);
+    }, 0);
 </script>
 	
 
 
 <?php
 
-//////////////////////////////////////////////////////////////////////////////
-//retrieve username and password
+include('conn.php');
 
+session_start();
 
 $username = $_SESSION['id'];
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////

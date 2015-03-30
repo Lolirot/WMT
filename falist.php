@@ -140,6 +140,7 @@ $result = mysql_query($query) or die(mysql_error());
 
 while($row = mysql_fetch_array($result)){
     
+    if($row['fa_first_name']!="NONE"){
 
  echo "<tr>";
    echo "<td>";
@@ -170,7 +171,7 @@ while($row = mysql_fetch_array($result)){
   echo "</tr>";
    
 }
-
+}
 ?>
  </table>
   </div>

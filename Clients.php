@@ -155,7 +155,8 @@ $query = "SELECT fa_admin FROM financial_advisors WHERE id=$faid limit 1";
 	
 	if($boolean == 1){
 		
-		$query = "SELECT * FROM customers ORDER BY faid"; 
+		$query = "select * from customers";
+		$query2 = "select id AS newid,fa_first_name,fa_last_name from financial_advisors";
 	}
 	else {
 $query = "SELECT * FROM customers WHERE faid = $username"; 
@@ -184,11 +185,24 @@ while($row = mysql_fetch_array($result)){
      
      if($boolean == 1){
      
+     $result2 = mysql_query($query2) or die(mysql_error());
+
+
+while($row2 = mysql_fetch_array($result2)){
+     
+     if($row['faid'] == $row2['newid']){
+     
      echo "<td>";
-    echo $row['faid'];
+     
+    echo $row2['fa_first_name'];
+    echo " ";
+    echo $row2['fa_last_name'];
+
      echo "</td>";
+ }
      
  }
+}
     
     $id = $row['id'];
     
