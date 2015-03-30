@@ -6,6 +6,9 @@ $user = "ap307";
 $pass = "abcap307354";
 $dbname = "ap307";
 
+session_start();
+$faid = $_SESSION['id'];
+
 $conn = mysql_connect("mysql-server-1","ap307","abcap307354");
 if (!$conn)
 {
@@ -13,7 +16,7 @@ if (!$conn)
 }
 mysql_select_db("ap307", $conn);
 
-$query = "SELECT * FROM events";
+$query = "SELECT * FROM events WHERE faID = $faid";
 
 $result = mysql_query($query) or die(mysql_error());
 $arr = array();

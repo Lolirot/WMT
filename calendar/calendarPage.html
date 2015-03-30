@@ -94,16 +94,21 @@
 
 			eventClick: function(calEvent, jsEvent, view)
 			{
+				
+				
 				//alert('Event: ' + calEvent.title);
         		//alert('Start: ' + calEvent.start);
         		//alert('View: ' + view.name);
         		var title = calEvent.title;
         		var startTime = calEvent.start.toString();
         		var endTime = calEvent.end.toString();
+        		var id = calEvent.id;
         		document.getElementById("titleDiv").innerHTML = "Title: " + title;
         		document.getElementById("startDiv").innerHTML = "Start: " + startTime;
         		document.getElementById("endDiv").innerHTML = "End: " + endTime;
+        		$('#eventid').attr("value",id);
         		$('#infoModal').modal('toggle');
+        		return false;
 			}
 
 
@@ -212,6 +217,10 @@
 		    	<label for="title">Url:</label>
 		      	<input class="form-control" id="url" name="url" placeholder="url">
 		    </div>
+		    <div>
+				<label for="Client">Client:</label>
+				<input class="form-control" id="client" name="client" placeholder="Client">
+		    </div>
 				<input type="hidden" id="start" name="start">
 				<input type="hidden" id="end" name="end">
 				<input type="hidden" id="fa" name="fa">
@@ -239,6 +248,21 @@
 		<div id="titleDiv"></div>
 		<div id="startDiv"></div>
 		<div id="endDiv"></div>
+		</br>
+		<form role="form" action="remove_events.php" method="post">
+			<div class="form-group">
+			<input type="hidden" id="eventid" name="eventid">
+			<button type="submit" id="myButton" class="btn btn-primary" >
+			Delete Event
+			</button>
+			</div>
+		</form>
+		
+		<script>
+		//$('#myButton').on('click',function(){
+			//$.load('remove_events')
+		</script>
+		
 	  </div>
     </div>
   </div>
