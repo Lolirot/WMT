@@ -62,14 +62,19 @@ $query = "SELECT fa_admin FROM financial_advisors WHERE id=$faid limit 1";
    
 }
 
-if($boolean = 1){
+	$query = "UPDATE customers SET first_name='$firstName',last_name='$lastName',phone_number='$phone',email_address='$emailaddress',address='$address' WHERE id=$id";
+
+
+if($boolean == 1){
 	
 	$advisor = $_POST["advisor"];
+	$query = "UPDATE customers SET first_name='$firstName',last_name='$lastName',phone_number='$phone',email_address='$emailaddress',address='$address',faid='$advisor' WHERE id=$id";
+
 	
 }
 
 
-$query = "UPDATE customers SET first_name='$firstName',last_name='$lastName',phone_number='$phone',email_address='$emailaddress',address='$address',faid='$advisor' WHERE id=$id";
+
 
 
 //remove this line when query comes out looking ok

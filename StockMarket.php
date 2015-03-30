@@ -31,12 +31,12 @@
 </div>
 <div class="navbar-collapse collapse">
 <ul class="nav navbar-nav">
-<li><a href="index.html">Home</a></li>
+<li><a href="index.php">Home</a></li>
 <li><a href="Clients.php">Clients</a></li>
 <li class="active"><a href="#contact">Stock Market</a></li>
 </ul>
 <ul class="nav navbar-nav navbar-right">
-<li><a href="Login.html">Log out</a></li>
+<li><a href="Login.php">Log out</a></li>
 </ul>
 </div>
 </nav>
@@ -88,6 +88,7 @@ echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z
 <?php
 include ("dbfunctions.php");
 include('conn.php');
+session_start();
 $faid = $_SESSION['id'];
 $username = "ap307";
 $password = "abcap307354";

@@ -45,7 +45,7 @@ $id = $_POST["id"];
 
 
 //$query = "DELETE FROM customers WHERE id=$id";
-$query = "UPDATE customers SET faid=3 WHERE id=$id";
+$query = "UPDATE customers SET faid=4 WHERE id=$id";
 
 //remove this line when query comes out looking ok
 

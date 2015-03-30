@@ -69,7 +69,7 @@
 	
 	if($boolean == 1){
 		echo '
-       <li><a href="transHistory.php">Transactions History</a></li>
+       <li><a href="transHistory.php">Transaction History</a></li>
       <li><a href = "falist.php">FA List</a></li>
       ';
   }
@@ -91,9 +91,9 @@
   <div class="panel-heading">
     <h3 class="panel-title">Latest Tweets</h3>
   </div>
-  <div class="panel-body">
-                           <a class="twitter-timeline"  href="https://twitter.com/Lolirotten_" data-widget-id="556888036668358656">Tweets by @Lolirotten_</a>
+  <div class="panel-body">            <a class="twitter-timeline"  href="https://twitter.com/hashtag/Finance" data-widget-id="582311434748608512">#Finance Tweets</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          
           
           
   </div>

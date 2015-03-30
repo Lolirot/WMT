@@ -44,7 +44,7 @@
     <ul class="nav navbar-nav">
       <li><a href="index.php">Home</a></li>
       <li><a href="Clients.php">Clients</a></li>
-      <li><a href="StockMarket.html">Stock Market</a></li>
+      <li><a href="StockMarket.php">Stock Market</a></li>
       
       <?php
       
@@ -75,7 +75,7 @@
 	
 	if($boolean == 1){
 		echo '
-       <li><a href="transHistory.php">Transactions History</a></li>
+       <li><a href="transHistory.php">Transaction History</a></li>
       <li class="active"><a href = "falist.php">FA List</a></li>
       ';
   }
