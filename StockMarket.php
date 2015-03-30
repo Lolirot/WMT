@@ -49,12 +49,13 @@
 <div class="panel-body">
 <?php
 $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
-//echo '<textarea name="id" cols="25" rows="1">Enter stock symbol</textarea>';
+//echo '<textarea name="" cols="25" rows="1">Enter stock symbol</textarea>';
 $yql_query = "select symbol,PreviousClose,Name from yahoo.finance.quotes where symbol in ('YHOO','AAPL','GOOG','MSFT')";
 $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
 $session = curl_init($yql_query_url);
 curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
 $json = curl_exec($session);
+curl_close($session);
 $phpObj = json_decode($json);
 for ($n=0; $n<count($phpObj->query->results->quote); $n++)
 {
@@ -94,20 +95,17 @@ $username = "ap307";
 $password = "abcap307354";
 dbConnect("$username", "$password");
 dbSelect("$username");
+if($faid == NULL){
+	
+	header("Location: Login.php");
+}
+echo "<h3>Select client: </h3>";
 echo '<select name="custid">';
-$faquery1 = "SELECT `first_name` FROM `customers` WHERE faid = '$faid'";
-$cust_first = mysql_query($faquery1) or die(mysql_error());
-$cust_list_first = mysql_fetch_array($cust_first);
-$faquery2 = "SELECT `last_name` FROM `customers` WHERE faid = '$faid'";
-$cust_last = mysql_query($faquery2) or die(mysql_error());
-$cust_list_last = mysql_fetch_array($cust_last);
-$faquery3 = "SELECT `id` FROM `customers` WHERE faid = '$faid'";
-$cid = mysql_query($faquery3) or die(mysql_error());
-$cid_list = mysql_fetch_array($cid);
-$n = sizeof($cust_list);
-for ($i = 0;$i < $n;$i++)
+$faquery1 = "SELECT first_name,last_name,id FROM customers WHERE faid = $faid";
+$faquery = mysql_query($faquery1) or die(mysql_error());
+while ($row = mysql_fetch_array($faquery))
 {
-	echo "<option value='$cid_list[$i]'>$cust_list_first[$i] $cust_list_last[$i]</option>";
+	echo "<option value=".$row['id'].">".$row['first_name']." ".$row['last_name']."</option>";
 }
 echo '</select>';
 ?>
