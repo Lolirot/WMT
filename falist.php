@@ -178,6 +178,50 @@ while($row = mysql_fetch_array($result)){
 </div>
 </div>
 
+  
+  <div class="col-xs-6 col-md-3">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add New Financial Advisor</h3>
+  </div>
+  <div class="panel-body">
+  <form class="form-horizontal" action="addFA.php" method="post">
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="firstname" placeholder="First Name" required">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="address" placeholder="Home Address " required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input type="number" class="form-control" name="phone" placeholder="Telephone" required>
+    </div>
+  </div>
+    <div class="form-group">
+  <div class="col-sm-10">
+      <input type="text" class="form-control" name="username" placeholder="New Username" required>
+    </div>
+    </div>
+      <div class="form-group">
+  <div class="col-sm-10">
+      <input type="text" class="form-control" name="password" placeholder="New Password" required>
+    </div>
+	</div>
+	<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Add Financial Advisor</button>
+    </div>
+  </div>
+
 
 
 </div>
