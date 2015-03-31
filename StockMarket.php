@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -49,21 +50,32 @@
 <div class="panel-body">
 <?php
 $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
-//echo '<textarea name="" cols="25" rows="1">Enter stock symbol</textarea>';
-$yql_query = "select symbol,PreviousClose,Name from yahoo.finance.quotes where symbol in ('YHOO','AAPL','GOOG','MSFT')";
+$yql_query = "select StockExchange from yahoo.finance.quotes where symbol in ('GOOG','BP.L')";
 $yql_query_url = $BASE_URL."?q=".urlencode($yql_query)."&format=json&env=http%3A%2F%2Fdatatables.org%2Falltables.env";
 $session = curl_init($yql_query_url);
 curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
 $json = curl_exec($session);
 curl_close($session);
 $phpObj = json_decode($json);
-for ($n=0; $n<count($phpObj->query->results->quote); $n++)
+echo 'Enter Stock Symbol';
+echo '<input type="text" name="stocks"><br>';
+echo '<input type="button" onclick="searchStocks()" value="SEARCH">';
+if ($_SESSION['stockObj'] != NULL)
 {
-$symbol = $phpObj->query->results->quote[$n]->symbol;
-$name = $phpObj->query->results->quote[$n]->Name;
-$price = $phpObj->query->results->quote[$n]->PreviousClose;
-echo "<h3>Stock Name: ".$name."</h3>";
-echo "<h3>Last Close Price: $".$price."</h3>";
+    $phpObj3 = $_SESSION['stockObj'];
+    for ($x=0;$x<count($phpObj3->query->results->quote);$x++)
+	{
+	$stockname2 = $phpObj3->query->results->quote[$x]->Name;
+	$closeprice = $phpObj3->query->results->quote[$x]->PreviousClose;
+	$stockexchange2 = $phpObj3->query->results->quote[$x]->StockExchange;
+		echo "Stock Name: $stockname2<br>";
+		echo "Previous Close Price: $closeprice<br>";
+		echo "Stock Exchange: $stockexchange2<br>";
+	}
+}
+else
+{
+	echo "<br>Stock symbol does not exist";
 }
 echo "</div>";
 echo "</div>";
@@ -75,7 +87,7 @@ echo '<div class="panel-heading">';
 echo '<h3 class="panel-title">Stockmarket Graph</h3>';
 echo '</div>';
 echo '<div class="panel-body">';
-echo '<img src = "http://chart.finance.yahoo.com/z?s='.$symbol.'&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">';
+echo '<img name ="graph" src = "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px">';
 ?>
 </div>
 </div>
@@ -96,8 +108,7 @@ $password = "abcap307354";
 dbConnect("$username", "$password");
 dbSelect("$username");
 if($faid == NULL){
-	
-	header("Location: Login.php");
+header("Location: Login.php");
 }
 echo "<h3>Select client: </h3>";
 echo '<select name="custid">';
@@ -105,12 +116,12 @@ $faquery1 = "SELECT first_name,last_name,id FROM customers WHERE faid = $faid";
 $faquery = mysql_query($faquery1) or die(mysql_error());
 while ($row = mysql_fetch_array($faquery))
 {
-	echo "<option value=".$row['id'].">".$row['first_name']." ".$row['last_name']."</option>";
+echo "<option value=".$row['id'].">".$row['first_name']." ".$row['last_name']."</option>";
 }
-echo '</select>';
+echo '</select><br>';
 ?>
-<textarea name="symbol" cols="25" rows="1">Enter stock symbol</textarea>
-<textarea name="quantity" cols="25" rows="1">Enter quantity</textarea>
+Enter Stock Symbol: <input type="text" name="symbol"><br>
+Enter Quantity<input type="text" name="quantity"><br>
 <input type=button onclick="buy()" value="BUY">
 <input type=button onclick="sell()" value="SELL">
 </div>
@@ -119,45 +130,56 @@ echo '</select>';
 <script>
 function buy()
 {
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
-	}
-	else
-	{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	var quantity = document.getElementsByName('quantity')[0].value;
-        var symbol = document.getElementsByName('symbol')[0].value;
-        var cid = document.getElementsByName('custid')[0].value;
-	xmlhttp.open("GET","buy.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
-	xmlhttp.send();
-	alert("Stocks purchased");
+var xmlhttp;
+if (window.XMLHttpRequest)
+{
+xmlhttp = new XMLHttpRequest();
 }
-
+else
+{
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+var quantity = document.getElementsByName('quantity')[0].value;
+var symbol = document.getElementsByName('symbol')[0].value;
+var cid = document.getElementsByName('custid')[0].value;
+xmlhttp.open("GET","buy.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
+xmlhttp.send();
+alert("Stocks purchased");
+}
 function sell()
 {
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{
-		xmlhttp = new XMLHttpRequest();
-	}
-	else
-	{
-		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	var quantity = document.getElementsByName('quantity')[0].value;
-	var symbol = document.getElementsByName('symbol')[0].value;
-        var cid = document.getElementsByName('custid')[0].value;
-	xmlhttp.open("GET","sell.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
-	xmlhttp.send();
-	alert("Stocks sold");
+var xmlhttp;
+if (window.XMLHttpRequest)
+{
+xmlhttp = new XMLHttpRequest();
+}
+else
+{
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+var quantity = document.getElementsByName('quantity')[0].value;
+var symbol = document.getElementsByName('symbol')[0].value;
+var cid = document.getElementsByName('custid')[0].value;
+xmlhttp.open("GET","sell.php?amount="+quantity+"&stock="+symbol+"&cid="+cid.toString(),true);
+xmlhttp.send();
+alert("Stocks sold");
 }
 
 function searchStocks()
 {
-
+	var xmlhttp;
+	if (window.XMLHttpRequest)
+	{
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var stocksym = document.getElementsByName('stocks')[0].value;
+	xmlhttp.open("GET","getstocks.php?symbol="+stocksym);
+       $('#graph').attr('src','http://chart.finance.yahoo.com/z?s='+stocksym+'&t=6m&q=l&l=on&z=l&p=m50,e200" alt = "graph" style="width:800px;height:355px');
+	xmlhttp.send();
 }
 </script>
 </body>
