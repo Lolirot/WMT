@@ -1,3 +1,9 @@
+<script>
+	setTimeout(function()
+	{
+		window.location='../index.php';
+	},0);
+</script>
 <?php
 
 $conn = mysql_connect("mysql-server-1","ap307","abcap307354");

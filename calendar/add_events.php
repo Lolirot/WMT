@@ -1,7 +1,7 @@
 <script>
 	setTimeout(function()
 	{
-		window.location='calendarPage.html';
+		window.location='../index.php';
 	},0);
 </script>
 <?php
@@ -15,6 +15,12 @@
 					session_start();
 
 					$faID = $_SESSION['id'];
+					
+					if($faID == NULL)
+					{
+						header("Location: Login.php");
+					}
+					
 					$title = $_POST['title'];
 					$start = $_POST['start'];
 					$end = $_POST['end'];

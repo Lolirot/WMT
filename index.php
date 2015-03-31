@@ -11,9 +11,16 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<link href="default.css" rel="stylesheet" type="text/css" media="screen" />
+	
+	<meta charset='utf-8' />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<script src='calendar/js/moment.min.js'></script>
+<link href='calendar/css/fullcalendar.css' rel='stylesheet' />
+<script src='calendar/js/fullcalendar.js'></script>
+<script src='calendar/js/bootstrap.js'></script>
 
 
-
+<title>Home</title>
 <link rel="icon" href="images/favicon.ico"/>
 
 </head>
@@ -102,6 +109,127 @@
 </div>
 
 
+<!------------------------------------------------------CALENDAR START---------------------------------------->
+<script>
+
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			//editable: true;
+			header: 
+			{
+				left:'prev, next today',
+				center:'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			selectable: true,
+			selectHelper: true,
+			defaultView: 'agendaWeek',
+
+			/*events: 
+			[
+		        {
+		            title: 'Work out',
+		            start: '2015-03-29T08:30:00',
+		            end: '2015-03-29T09:30:00'
+		        },
+		        {
+		            title: 'Gon get me some shoes',
+		            start: '2015-03-29T14:30:00',
+		            end: '2015-03-29T15:30:00'
+		        },
+		        {
+		            title: 'Meeting with Tom',
+		            start: '2015-03-26T10:30:00',
+		            end: '2015-03-26T12:30:00'
+		        }
+    		],*/
+
+			events: 
+			{
+				url:'calendar/events.php',
+				error: function()
+				{
+					alert('There was an error loading.');
+				}
+			},
+			
+			eventRender: function(event, element, view) 
+			{
+				if (event.allDay === 'true') 
+				{
+					event.allDay = true;
+				} else 
+					{
+						event.allDay = false;
+					}
+		   },
+			
+			select: function(start, end) 
+			{
+				var startTime = start.toISOString();
+        		var endTime = end.toISOString();
+        		$('#start').attr("value",startTime);
+        		$('#end').attr("value",endTime);
+				$('#calendarModal').modal('toggle');
+				//$('#calendar').fullCalendar('unselect');
+			},
+
+			eventClick: function(calEvent, jsEvent, view)
+			{
+				
+				
+				//alert('Event: ' + calEvent.title);
+        		//alert('Start: ' + calEvent.start);
+        		//alert('View: ' + view.name);
+        		var title = "Title: " + calEvent.title;
+        		var startTime = calEvent.start.toString();
+        		var endTime = calEvent.end.toString();
+        		var id = calEvent.id;
+        		document.getElementById("titleDiv").innerHTML = "Title: " + title;
+        		document.getElementById("startDiv").innerHTML = "Start: " + startTime;
+        		document.getElementById("endDiv").innerHTML = "End: " + endTime;
+        		$('#eventid').attr("value",id);
+        		if(document.getElementById("evedetail").style.display="none")
+        		{
+					$("#evedetail").toggle();
+				}
+        		
+        		//$('#infoModal').modal('toggle');
+        		return false;
+			}
+
+
+		});
+		
+	});
+
+</script>
+<?php
+session_start();
+$faID = $_SESSION['id'];
+if($faID == NULL)
+{
+	header("Location: ../Login.php");
+}
+?>
+
+<style>
+
+	#calendarBody {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 80%;
+		margin: 0 auto;
+	}
+
+</style>
+
 
 <div class="col-md-6">
 	<div class="jquery-calendar"></div> 
@@ -110,21 +238,74 @@
     <h3 class="panel-title">Meetings for this day</h3>
   </div>
   <div class="panel-body">
-    Time: </br>
-    Day: </br>
-    Note:
+	<div id="calendarBody">
+		<div id='calendar'></div>
+	</div>
+	- Drag to change duration of event</br>
+	- Clicking will create a 30 minute long event
   </div>
 </div>
 </div>
 
-<div class="col-md-3">
+<!-- ----------------------------------------------------Calendar Modal------------------------------ -->
+<div id="calendarModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content" style="font-family:Arial">
+    	<div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title"><b>Please enter your details</b></h4>
+      	</div>
+      <div class="modal-body">
+		  <form role="form" action="calendar/add_events.php" method="post">
+		    <div class="form-group">
+		      	<label for="title">Title:</label>
+		      	<input class="form-control" id="title" name="title" placeholder="Title" required>
+		    </div>
+		    <div>
+		    	<label for="title">Url:</label>
+		      	<input class="form-control" id="url" name="url" placeholder="url">
+		    </div></br>
+		    <div>
+				<label for="Client">Client:</label>
+				<input class="form-control" id="client" name="client" placeholder="Client">
+		    </div></br>
+				<input type="hidden" id="start" name="start">
+				<input type="hidden" id="end" name="end">
+				<input type="hidden" id="fa" name="fa">
+		    <div class="form-group">
+		      	<label for="notes">Additonal Notes:</label>
+		      	<textarea class="form-control" id="notes" name="notes" placeholder="Note"></textarea>
+		    </div>
+		    <button type="submit" class="btn btn-default">Submit</button>
+		  </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- -----------------------------------------------End of Calendar Modal---------------------------- -->
+
+
+<!-----------------------------------------------------CALENDAR END -------------------------------------------->
+
+<div class="col-md-3"  id="evedetail"  style="display: none;">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Upcoming Events</h3>
+    <h3 class="panel-title">Event Details</h3>
   </div>
   <div class="panel-body">
-    Display here events that are picked from the database, but selected for a specific date or range of dates or something.<br/><br/>
-    <a href="calendarPage.html">View Full Calendar</a>
+    <div id="titleDiv"></div></br>
+	<div id="startDiv"></div></br>
+	<div id="endDiv"></div></br>
+	<div id="buttonDiv">
+	<form role="form" action="calendar/remove_events.php" method="post">
+			<div class="form-group">
+			<input type="hidden" id="eventid" name="eventid">
+			<button type="submit" id="myButton" class="btn btn-primary" >
+			Delete Event
+			</button>
+			</div>
+	</form>
+	</div>
     </div>
 
     </div>

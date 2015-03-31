@@ -9,6 +9,11 @@ $dbname = "ap307";
 session_start();
 $faid = $_SESSION['id'];
 
+/*if($faID == NULL)
+{
+	header("Location: ../Login.php");
+}*/
+
 $conn = mysql_connect("mysql-server-1","ap307","abcap307354");
 if (!$conn)
 {
